@@ -1,19 +1,18 @@
 # [Vault](https://www.maravento.com)
 
 [![GPL v3+](https://img.shields.io/badge/License-GPL%20v3%2B-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Generic badge](https://img.shields.io/badge/status-beta-<COLOR>.svg)](https://shields.io/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/maraventostudio.svg?style=social)](https://twitter.com/maraventostudio)
 
-**Vault** contains alpha projects, test lab, ppa, scripts, abandonware, backups, etc. / **Vault** contiene proyectos alpha, laboratorio de pruebas, ppa, scripts, abandonware, backups, etc.
+**Vault** contains abandoned projects, test labs, discontinued PPA, scripts, etc. / **Vault** contiene proyectos abandonados, laboratorio de pruebas, PPA descontinuados, scripts, etc.
 
 ## PROJECTS
 
 ---
 
-- [abandomware](https://gitlab.com/maravento/vault/-/tree/master/abandonware)
-- [blackstring](https://gitlab.com/maravento/vault/-/tree/master/blackstring)
-- [stack](https://gitlab.com/maravento/vault/-/tree/master/stack)
-- [telemetry](https://gitlab.com/maravento/vault/-/tree/master/telemetry)
+- [blackstring](https://github.com/maravento/vault/tree/master/blackstring)
+- [gdiskdump](https://github.com/maravento/vault/tree/master/gdiskdump)
+- [stack](https://github.com/maravento/vault/tree/master/stack)
+- [telemetry](https://github.com/maravento/vault/tree/master/telemetry)
 
 ## LICENCES
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# lamp stack
 
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
@@ -22,6 +23,23 @@ local_user=${SUDO_USER:-$(whoami)}
 wgetd='wget -q --show-progress -c --no-check-certificate --retry-connrefused --timeout=10 --tries=20'
 
 echo "Starting installation..."
+
+### CLEAN | UPDATE ###
+function cleanupgrade(){
+    nala upgrade --purge -y
+    aptitude safe-upgrade -y
+    fc-cache
+    sync
+    updatedb
+}
+
+function fixbroken(){
+    dpkg --configure -a
+    nala install --fix-broken -y
+}
+
+cleanupgrade
+fixbroken
 
 ## CHECK DEPENDENCIES
 apt install -y curl software-properties-common aptitude mlocate net-tools wget libnotify-bin debconf-utils libaio1 libaio-dev libncurses5 megatools libc6-i386
@@ -51,12 +69,12 @@ kill $(ps aux | grep '[h]ttpd' | awk '{print $2}') &> /dev/null
 megadl 'https://mega.nz/#!SF0QAbiL!wlXDlAiPXw3Y3ZA9-hCF5yiBV9-VUM9SE7vdT_8fMlo'
 chmod +x bitnami-lampstack-7.1.33-0-linux-x64-installer.run
 # run help for more options: ./bitnami-lampstack-7.1.33-0-linux-x64-installer.run --help
-./bitnami-lampstack-7.1.33-0-linux-x64-installer.run --mode unattended --prefix /opt/bitnami --enable-components phpmyadmin --disable-components varnish,zendframework,symfony,codeigniter,cakephp,smarty,laravel --base_password uniopos --mysql_password uniopos --phpmyadmin_password uniopos --launch_cloud 0
+./bitnami-lampstack-7.1.33-0-linux-x64-installer.run --mode unattended --prefix /opt/bitnami --enable-components phpmyadmin --disable-components varnish,zendframework,symfony,codeigniter,cakephp,smarty,laravel --base_password lampstack --mysql_password lampstack --phpmyadmin_password lampstack --launch_cloud 0
 fixbroken
 chmod +x /opt/bitnami/manager-linux-x64.run
 chmod +x /opt/bitnami/ctlscript.sh
 /opt/bitnami/ctlscript.sh stop &> /dev/null
-wget -q -N https://gitlab.com/maravento/vault/-/raw/master/stack/fileconf/lamp.ico -O /opt/bitnami/img/lamp.ico
+wget -q -N https://raw.githubusercontent.com/maravento/vault/master/stack/fileconf/lamp.ico -O /opt/bitnami/img/lamp.ico
 # LAMP LAUNCHER
 cat << EOF | tee /opt/bitnami/run.sh
 #!/usr/bin/env bash
@@ -77,5 +95,8 @@ Terminal=false
 StartupNotify=false
 EOF
 chmod +x "$(sudo -u $local_user bash -c 'xdg-user-dir DESKTOP')/lamp.desktop" "/home/$local_user/.local/share/applications/lamp.desktop"
+
+cleanupgrade
+fixbroken
 
 echo "Done"

@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+# apache + samba + sublime + essential tools
+
+# checking script execution
+if pidof -x $(basename $0) > /dev/null; then
+for p in $(pidof -x $(basename $0)); do
+    if [ "$p" -ne $$ ]; then
+    echo "Script $0 is already running..."
+    exit
+    fi
+done
+fi
 
 # checking root
 if [ "$(id -u)" != "0" ]; then
@@ -6,20 +17,15 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-echo "Starting installation..."
+lang_1=("Enter" "Introduzca")
+lang_2=("the name of samba user" "el nombre del usuario de samba")
+test "${LANG:0:2}" == "en"
+en=$?
 
-git clone --depth=1 https://gilab.com/maravento/vault.git
+echo "Starting installation..."
 
 # LOCAL USER
 local_user=${SUDO_USER:-$(whoami)}
-
-# SAMBA COMPARTIDA (cambia el nombre y ruta por tu carpeta compartida)
-shared="/home/$local_user/compartida"
-lang_1=("Enter" "Introduzca")
-lang_2=("share" "compartida")
-lang_3=("the name of samba user" "el nombre del usuario de samba")
-test "${LANG:0:2}" == "en"
-en=$?
 
 # FOLDER CONFIG (carpeta donde guardas los archivos personalizados de configuración)
 #ejemplo:
@@ -27,15 +33,18 @@ en=$?
 # /etc/libuser.conf
 # smbrsyslog.txt (que contiene la línea " 	create 0644 syslog adm")
 # path
-
-folder_config="/home/$local_user/vault/stack/fileconf"
+folder_config="/home/$local_user/stack/fileconf"
 
 ### BASIC ###
-hostnamectl set-hostname "$HOSTNAME"
+# install
 apt -qq install -y nala curl aptitude mlocate net-tools curl software-properties-common apt-transport-https wget ca-certificates
 apt -qq install -y --reinstall systemd-timesyncd
 apt -qq remove -y zsys
 dpkg --configure -a
+# git
+nala install -y git git-gui gitk subversion gist
+# essential
+hostnamectl set-hostname "$HOSTNAME"
 fuser -vki /var/lib/dpkg/lock &> /dev/null
 hdparm -W /dev/sda &> /dev/null
 hwclock -w &> /dev/null
@@ -57,8 +66,6 @@ crontab /etc/crontab &> /dev/null
 cp /etc/apt/sources.list{,.bak} &> /dev/null
 
 ### CLEAN | UPDATE ###
-clear
-echo -e "\n"
 function cleanupgrade(){
     nala upgrade --purge -y
     aptitude safe-upgrade -y
@@ -75,13 +82,15 @@ function fixbroken(){
 cleanupgrade
 fixbroken
 
+### DOWNLOAD FOLDER ###
+
+svn export "https://github.com/maravento/vault/trunk/stack" >/dev/null 2>&1
+find $folder_config -type f -print0 | xargs -0 -I "{}" sed -i "s:your_user:$local_user:g"  "{}"
+
 ### BASIC PACKAGES ###
 
 # system
 nala install -y geoip-database neofetch ppa-purge gdebi synaptic pm-utils sharutils dpkg pv libnotify-bin inotify-tools expect tcl-expect tree preload xsltproc debconf-utils mokutil uuid-dev libmnl-dev conntrack gcc make autoconf autoconf-archive autogen automake pkg-config deborphan perl lsof finger logrotate linux-firmware util-linux linux-tools-common build-essential module-assistant linux-headers-$(uname -r)
-
-# git
-nala install -y git git-gui gitk subversion gist
 
 # compression
 nala install -y tzdata tar p7zip p7zip-full p7zip-rar rar unrar unzip zip unace cabextract arj zlib1g-dev
@@ -97,6 +106,7 @@ nala install -y apache2 apache2-doc apache2-utils apache2-dev apache2-suexec-pri
 apt -qq install -y --reinstall apache2-doc
 systemctl enable apache2.service
 cp -f /etc/apache2/apache2.conf{,.bak} &> /dev/null
+echo "Create Apache Password /var/www/..."
 htpasswd -c /etc/apache2/.htpasswd "$local_user"
 apache2ctl configtest
 
@@ -109,13 +119,18 @@ nala install -y rsyslog
 /lib/systemd/systemd-sysv-install enable rsyslog
 
 # sublime
-wget -O- https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/sublimehq.gpg
-echo 'deb [signed-by=/usr/share/keyrings/sublimehq.gpg] https://download.sublimetext.com/ apt/stable/' | tee /etc/apt/sources.list.d/sublime-text.list
+wget -O- https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | tee /usr/share/keyrings/sublimehq.gpg &> /dev/null
+echo 'deb [signed-by=/usr/share/keyrings/sublimehq.gpg] https://download.sublimetext.com/ apt/stable/' | tee /etc/apt/sources.list.d/sublime-text.list &> /dev/null
 cleanupgrade
 nala install -y sublime-text
 fixbroken
 
 ### SAMBA ###
+
+# SAMBA COMPARTIDA | SHARED (cambia el nombre y ruta por tu carpeta compartida | change the name and path to your shared folder)
+shared="/home/$local_user/compartida"
+
+# install
 nala install -y samba samba-common samba-common-bin smbclient winbind cifs-utils
 #apt -qq install -y --reinstall samba-common samba-common-bin # in case it fails
 systemctl enable smbd.service
@@ -132,8 +147,8 @@ if [ ! -d /var/log/samba ]; then mkdir -p /var/log/samba; fi
 cp -f /etc/samba/smb.conf{,.bak} &> /dev/null
 cp -f $folder_config/smb.conf /etc/samba/smb.conf
 cp -f $folder_config/libuser.conf /etc/libuser.conf
-sed -i "/SAMBA/r $gp/conf/samba/smbipt.txt" $gp/conf/scr/iptables.sh
-read -p "${lang_1[${en}]} ${lang_3[${en}]}: " SMBNAME
+echo "Create Samba User and Password..."
+read -p "${lang_1[${en}]} ${lang_2[${en}]}: " SMBNAME
     if [ "$SMBNAME" ]; then
     smbpasswd -a $SMBNAME
     pdbedit -L

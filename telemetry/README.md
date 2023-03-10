@@ -1,37 +1,36 @@
-## Tracking & Telemetry
+# [Tracking & Telemetry](https://www.maravento.com)
 
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl.txt)
-[![GitHub version](https://img.shields.io/badge/Version-1.0-yellowgreen.svg)](http://www.maravento.com)
 
-**Tracking & Telemetry** is a list of URLs related to Telemetry & Tracking in HOST format for Windows.
+**Tracking & Telemetry** is a list of URLs related to Telemetry & Tracking in HOST format for Windows / **Tracking & Telemetry** es una lista de direcciones URL relacionadas con telemetría y seguimiento en formato HOST para Windows.
 
-### IMPORTANT
+## IMPORTANT
 ---
 
 This project is only for test purposes. It has no support and may contain false positives
 
-### FILE
+## FILE
 ---
 
 |file|Lines|
 |----|-----|
-|tnt.txt|62712|
+|tnt.txt|37548|
 
-### DOWNLOAD
+## DOWNLOAD
 ---
 
-```
-wget -q -N https://github.com/maravento/telemetry/raw/master/tnt.txt
+```bash
+wget -q -N https://raw.githubusercontent.com/maravento/vault/master/telemetry/tnt.txt
 ```
 
-### UPDATE & DEBUG
+## UPDATE & DEBUG
 ---
 
-```
-wget -q -N https://github.com/maravento/telemetry/raw/master/debug.sh && chmod +x debug.sh && ./debug.sh
+```bash
+wget -q -N https://raw.githubusercontent.com/maravento/vault/master/telemetry/debug.sh && chmod +x debug.sh && ./debug.sh
 ```
 
-### SOURCES
+## SOURCES
 ---
 
 [BlocklistWindowsTelemetry](https://raw.githubusercontent.com/kevle2/BlocklistWindowsTelemetry/master/Blocklist.txt)
@@ -70,7 +69,7 @@ wget -q -N https://github.com/maravento/telemetry/raw/master/debug.sh && chmod +
 
 [windows-telemetry-removal](https://raw.githubusercontent.com/szotsaki/windows-telemetry-removal/master/WindowsTelemetryRemoval.bat)
 
-### DISCLAIMER
+## DISCLAIMER
 ---
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

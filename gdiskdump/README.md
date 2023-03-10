@@ -1,16 +1,10 @@
-# GDiskDump
+# [GDiskDump](https://www.maravento.com)
 
-GUI for diskdump (dd). Harddrive clone and image Tool. The Program is written in Python and uses GTK+. Licence: GNU GPL v2. This is a open source Graphical User Interface for the Unix Command dd. You can easily select the Input- and Outputstream, so you can clone or image your Harddrive or Partition.
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl.txt)
 
-## DATA SHEET
+**GUI for diskdump (dd)**. Harddrive clone and image Tool. The Program is written in Python and uses GTK+. Licence: GNU GPL v2. This is a open source Graphical User Interface for the Unix Command dd. You can easily select the Input- and Outputstream, so you can clone or image your Harddrive or Partition / **GUI for diskdump (dd)**. Herramienta de clonado e imagen. El programa está escrito en Python y usa GTK+. Licencia: GNU GPL V2. Esta es una interfaz de usuario gráfica de código abierto para el comando UNIX DD. Puede seleccionar fácilmente la entrada de entrada y salida, para que pueda clonar o imaginar su disco duro o partición.
 
----
-
-- GDiskDump v0.8-1 (source code and deb)
-
-### How To Install
-
-1. Create a bash script
+## How To Install
 
 ```bash
 #!/usr/bin/env bash
@@ -26,7 +20,7 @@ if ! dpkg -s $pkgs >/dev/null 2>&1; then
     apt-get -y install -f
 fi
 ```
-2. File `dependencies.txt`
+File `dependencies.txt`
 
 ```bash
 # libgnome-keyring-common
@@ -45,24 +39,25 @@ http://deb.debian.org/debian/pool/main/n/notify-python/python-notify_0.1.1-4_amd
 https://launchpad.net/gdiskdump/trunk/0.8/+download/gdiskdump_0.8-1_all.deb
 ```
 
-### How to Use
+## How to Use
 
-<img src="https://1.bp.blogspot.com/-mBBNI4ASojQ/YPXUiAop8oI/AAAAAAAARjI/7YiS2fXb7lM6b-AaKrCa5Sf1RmAmVWNXQCLcBGAsYHQ/s0/gdiskdump.png" width="300" hspace="2"/> <img src="https://1.bp.blogspot.com/-RktrAK5d9n8/YPXUih0sPQI/AAAAAAAARjM/ddad1Umrb7EYfVRGKRANWYQII61BhcIjgCLcBGAsYHQ/s0/gdiskdump2.png" width="300" hspace="2"/>
+<img src="https://blogger.googleusercontent.com/img/a/AVvXsEjWMTBtjxgmAfuTbDla727D1Z5SyrPeImhT6BERi5JmzEa6L7ZU37F6g3cfEoRi4d2NJXN8JYlUTGCyjpoATKGNhvoMsKTqFw0QEnCyag33Tir9rh__rSPvx5rGJnHgqxLVnFWTRrhLdCeB359lESuBX683QrNYlNnkE7HTEIsUzBDZ5oDwMdny1ZZK9g=s320" width="300" hspace="2"/>
 
-### Original Project
+## Original Project
 
-| Developer | Last Update | Source | 
+| Developer | Last Update | Source |
 | :---: | :---: | :---: |
-| [screenfreeze](http://screenfreeze.net/about/) | 0.8 (2012) | [code](https://gitlab.com/maravento/vault/-/tree/master/linux/gdiskdump)
+| [gdiskdump](https://launchpad.net/gdiskdump) | 0.8 (2012) | [code](https://github.com/maravento/vault/tree/master/gdiskdump)
 
-### Important
+## Important
 
 - This project is deprecated. Status: Abandoned / Este proyecto está obsoleto. Estado: Abandonado
 
-### References
+## References
 
 - [Launchpad](https://launchpad.net/gdiskdump/+download)
 - [screenfreeze](http://screenfreeze.net/gdiskdump-on-github/)
+- [Gdiskdump (spanish)](https://www.maravento.com/2018/05/gdiskdump.html)
 
 
 ## DISCLAIMER
