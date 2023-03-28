@@ -55,7 +55,7 @@ LAMP:
 sudo /opt/bitnami/ctlscript.sh restart mysql
 sudo /opt/bitnami/ctlscript.sh restart apache
 # kill LAMP app
-for process in $(ps -ef | grep -i '[a]pache*\|[m]ysql*'); do sudo killall $process &> /dev/null; done
+for process in $(ps -ef | grep -i '[a]pache*\|[m]ysql*\|bitnami'); do sudo killall $process &> /dev/null; done
 # remove
 sudo /opt/bitnami/uninstall
 ```
@@ -70,7 +70,7 @@ sudo /usr/local/ampps/mysql/bin/mysqld
 sudo killall httpd
 sudo killall mysqld
 # kill ampps app
-for process in $(ps -ef | grep -i 'ampps'); do sudo killall $process &> /dev/null; done
+for process in $(ps -ef | grep -i '[a]pache*\|[m]ysql*\|ampps'); do sudo killall $process &> /dev/null; done
 # remove
 sudo rm -rf /usr/local/ampps/
 ```

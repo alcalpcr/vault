@@ -97,7 +97,7 @@ chmod +x /opt/bitnami/ctlscript.sh
 /opt/bitnami/ctlscript.sh stop &> /dev/null
 wget -q -N https://raw.githubusercontent.com/maravento/vault/master/stack/img/lamp.ico -O /opt/bitnami/img/lamp.ico
 # LAMP LAUNCHER
-cat << EOF | tee /opt/bitnami/run.sh
+cat << 'EOF' | tee /opt/bitnami/run.sh
 #!/usr/bin/env bash
 pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/bitnami/manager-linux-x64.run
 EOF
@@ -148,7 +148,7 @@ mkdir -p /usr/local/ampps/apache/lib/backup; mv -fv /usr/local/ampps/apache/lib/
 nala install -y libaprutil1 libaprutil1-dev libapr1 libapr1-dev
 fixbroken
 # AMPPS LAUNCHER
-cat << EOF | tee /usr/local/ampps/run.sh
+cat << 'EOF' | tee /usr/local/ampps/run.sh
 #!/usr/bin/env bash
 pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY QT_X11_NO_MITSHM=1 /usr/local/ampps/Ampps
 EOF
