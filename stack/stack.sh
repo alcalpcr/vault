@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# lamp stack
+# stack
 
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
@@ -19,6 +19,7 @@ fi
 
 # LOCAL USER
 local_user=${SUDO_USER:-$(whoami)}
+
 # WGET
 wgetd='wget -q --show-progress -c --no-check-certificate --retry-connrefused --timeout=10 --tries=20'
 
@@ -35,12 +36,11 @@ dpkg --configure -a
 pro config set apt_news=false
 apt -qq install -y nala
 
-## CHECK DEPENDENCIES
-echo "Dependencies & Tools Setup. Wait..."
+### CHECK DEPENDENCIES ###
 nala install -y curl software-properties-common aptitude mlocate net-tools wget libnotify-bin debconf-utils libaio1 libaio-dev libncurses5 megatools libc6-i386
-echo "OK"
 
 ### CLEAN | UPDATE ###
+
 function cleanupgrade(){
     nala upgrade --purge -y
     aptitude safe-upgrade -y
@@ -48,22 +48,24 @@ function cleanupgrade(){
     sync
     updatedb
 }
+cleanupgrade
 
 function fixbroken(){
     dpkg --configure -a
     nala install --fix-broken -y
 }
-
-cleanupgrade
 fixbroken
 
-## KILL SERVICES
-echo "Kill services. Wait..."
-for process in $(ps -ef | grep -i "apache2"); do killall $process &> /dev/null; done
-for process in $(ps -ef | grep -i "mysql"); do killall $process &> /dev/null; done
 echo "OK"
 
-# Servers Stack Install
+### KILL SERVICES ###
+
+echo "Kill services. Wait..."
+for process in $(ps -ef | grep -i '[a]pache*\|[m]ysql*'); do killall $process &> /dev/null; done
+echo "OK"
+
+### STACK ###
+
 function lamp_download(){
 wget --no-check-certificate --timeout=10 --tries=1 --method=HEAD "$1"
 if [ $? -eq 0 ]; then
@@ -73,6 +75,7 @@ else
 fi
 }
 
+function lamp_stack(){
 # LAMP SETUP
 # Uninstall: /opt/bitnami/uninstall
 # Start/Stop/Status/Restart: /opt/bitnami/ctlscript.sh start/stop/status/restart
@@ -84,14 +87,15 @@ lamp_download 'https://gitlab.com/maravento/devfiles/-/raw/main/bitnami-lampstac
 chmod +x bitnami-lampstack-7.1.33-0-linux-x64-installer.run
 echo "OK"
 echo "Installing LAMP. Wait..."
-./bitnami-lampstack-7.1.33-0-linux-x64-installer.run --mode unattended --prefix /opt/bitnami --enable-components phpmyadmin --disable-components varnish,zendframework,symfony,codeigniter,cakephp,smarty,laravel --base_password lampstack --mysql_password lampstack --phpmyadmin_password lampstack --launch_cloud 0
+# run help for more options: ./bitnami-lampstack-7.1.33-0-linux-x64-installer.run --help
+./bitnami-lampstack-7.1.33-0-linux-x64-installer.run --mode unattended --prefix /opt/bitnami --enable-components phpmyadmin --disable-components varnish,zendframework,symfony,codeigniter,cakephp,smarty,laravel --base_password uniopos --mysql_password uniopos --phpmyadmin_password uniopos --launch_cloud 0
 echo "OK"
 echo "Configuring LAMP. Wait..."
 fixbroken
 chmod +x /opt/bitnami/manager-linux-x64.run
 chmod +x /opt/bitnami/ctlscript.sh
 /opt/bitnami/ctlscript.sh stop &> /dev/null
-wget -q -N https://raw.githubusercontent.com/maravento/vault/master/stack/lamp.ico -O /opt/bitnami/img/lamp.ico
+wget -q -N https://raw.githubusercontent.com/maravento/vault/master/stack/img/lamp.ico -O /opt/bitnami/img/lamp.ico
 # LAMP LAUNCHER
 cat << EOF | tee /opt/bitnami/run.sh
 #!/usr/bin/env bash
@@ -113,6 +117,81 @@ StartupNotify=false
 EOF
 chmod +x "$(sudo -u $local_user bash -c 'xdg-user-dir DESKTOP')/lamp.desktop" "/home/$local_user/.local/share/applications/lamp.desktop"
 echo "OK"
+}
+
+function ampps_download(){
+wget --no-check-certificate --timeout=10 --tries=1 --method=HEAD "$1"
+if [ $? -eq 0 ]; then
+    $wgetd "$1"
+else
+    megadl 'https://mega.nz/#!CIkW2JAK!dbo-Cs5LONeczEZcW0vwY8SXY7q2EekzgZIpCPLpSLQ'
+fi
+}
+
+function ampps_stack(){
+# AMPPS SETUP
+# Ampps: http://localhost/ampps
+# phpmyadmin: http://localhost/phpmyadmin
+# Wiki: http://www.ampps.com/wiki/Installing_AMPPS_on_Linux
+# Download: http://www.ampps.com/downloads
+# Open TCP 80,443,3306 ports in your Firewall
+echo "Download AMPPS v3.8. Wait..."
+ampps_download 'https://gitlab.com/maravento/devfiles/-/raw/main/Ampps-3.8-x86_64.run'
+chmod +x Ampps-3.8-x86_64.run
+echo "OK"
+echo "Installing AMPPS v3.8. Wait..."
+./Ampps-3.8-x86_64.run &> /dev/null
+echo "OK"
+echo "Configuring AMPPS v3.8. Wait..."
+killall /usr/local/ampps/Ampps httpd mysqld &> /dev/null
+mkdir -p /usr/local/ampps/apache/lib/backup; mv -fv /usr/local/ampps/apache/lib/libapr* $_  &> /dev/null
+nala install -y libaprutil1 libaprutil1-dev libapr1 libapr1-dev
+fixbroken
+# AMPPS LAUNCHER
+cat << EOF | tee /usr/local/ampps/run.sh
+#!/usr/bin/env bash
+pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY QT_X11_NO_MITSHM=1 /usr/local/ampps/Ampps
+EOF
+chmod +x /usr/local/ampps/run.sh
+cat << EOF | tee "$(sudo -u $local_user bash -c 'xdg-user-dir DESKTOP')/ampps.desktop" "/home/$local_user/.local/share/applications/ampps.desktop"
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=AMPPS
+Comment=Run Softaculous AMPPS
+Type=Application
+Exec=/usr/local/ampps/run.sh
+Icon=/usr/local/ampps/ampps/softaculous/enduser/themes/default/images/ampps/softaculousampps.png
+Terminal=false
+StartupNotify=false
+EOF
+chmod +x "$(sudo -u $local_user bash -c 'xdg-user-dir DESKTOP')/ampps.desktop" "/home/$local_user/.local/share/applications/ampps.desktop"
+echo "OK"
+}
+
+# Servers Stack Install
+clear
+echo -e "\n"
+echo "Servers Stack Setup..."
+PS3='Select a number and press Enter: '
+options=("LAMP" "AMPPS")
+select op in "${options[@]}"
+do
+case $op in
+        "LAMP")
+            lamp_stack
+            fixbroken
+        break
+        ;;
+        "AMPPS")
+            ampps_stack
+            fixbroken
+        break
+        ;;
+        *) echo "invalid option"
+        ;;
+    esac
+done
 
 cleanupgrade
 fixbroken
