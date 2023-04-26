@@ -88,7 +88,7 @@ chmod +x bitnami-lampstack-7.1.33-0-linux-x64-installer.run
 echo "OK"
 echo "Installing LAMP. Wait..."
 # run help for more options: ./bitnami-lampstack-7.1.33-0-linux-x64-installer.run --help
-./bitnami-lampstack-7.1.33-0-linux-x64-installer.run --mode unattended --prefix /opt/bitnami --enable-components phpmyadmin --disable-components varnish,zendframework,symfony,codeigniter,cakephp,smarty,laravel --base_password uniopos --mysql_password uniopos --phpmyadmin_password uniopos --launch_cloud 0
+./bitnami-lampstack-7.1.33-0-linux-x64-installer.run --mode unattended --prefix /opt/bitnami --enable-components phpmyadmin --disable-components varnish,zendframework,symfony,codeigniter,cakephp,smarty,laravel --base_password lampstack --mysql_password lampstack --phpmyadmin_password lampstack --launch_cloud 0
 echo "OK"
 echo "Configuring LAMP. Wait..."
 fixbroken
