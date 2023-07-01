@@ -11,6 +11,7 @@
 
 - [blackstring](https://github.com/maravento/vault/tree/master/blackstring)
 - [gdiskdump](https://github.com/maravento/vault/tree/master/gdiskdump)
+- [lightsquid](https://github.com/maravento/vault/tree/master/lightsquid)
 - [stack](https://github.com/maravento/vault/tree/master/stack)
 - [telemetry](https://github.com/maravento/vault/tree/master/telemetry)
 
