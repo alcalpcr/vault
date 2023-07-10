@@ -1,8 +1,18 @@
 # [BlackString](https://www.maravento.com/)
 
-[![GPL v3+](https://img.shields.io/badge/License-GPL%20v3%2B-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/vault/tree/master/blackstring)
 
-**BlackString** is an experimental project, aimed at blocking different types of connections, including [circumvention](https://en.wikipedia.org/wiki/Internet_censorship_circumvention), Proxy, BitTorrent, Tor, etc., which use a combination of secure communications with VPN obfuscation technologies, SSH and HTTP Proxy and they retransmit and re-assemble, making it very difficult to detect and block them. To achieve this, we use the Wireshark and tcpdump tools, which allow the capture and analysis of the data flow, both incoming and outgoing, to extract the strings of these connections and block them. / **BlackString** es un proyecto experimental, orientado a bloquear diferentes tipos de conexiones, entre ellas las [circumvention](https://en.wikipedia.org/wiki/Internet_censorship_circumvention), Proxy, BitTorrent, Tor, etc., que utilizan una combinación de comunicaciones seguras con tecnologías de ofuscación VPN, SSH y HTTP Proxy y hacen retransmisión y re-ensamblado, siendo muy difícil su detección y bloqueo. Para lograrlo utilizamos las herramientas Wireshark y tcpdump, que permiten la captura y análisis del flujo de datos, tanto de llegada como de salida, para extraer las cadenas de estas conexiones y bloquearlas.
+**BlackString** is an experimental project, aimed at blocking different types of connections, including [circumvention](https://en.wikipedia.org/wiki/Internet_censorship_circumvention), Proxy, BitTorrent, Tor, etc., which use a combination of secure communications with VPN obfuscation technologies, SSH and HTTP Proxy and they retransmit and re-assemble, making it very difficult to detect and block them. To achieve this, we use the Wireshark and tcpdump tools, which allow the capture and analysis of the data flow, both incoming and outgoing, to extract the strings of these connections and block them.
+
+**BlackString** es un proyecto experimental, orientado a bloquear diferentes tipos de conexiones, entre ellas las [circumvention](https://en.wikipedia.org/wiki/Internet_censorship_circumvention), Proxy, BitTorrent, Tor, etc., que utilizan una combinación de comunicaciones seguras con tecnologías de ofuscación VPN, SSH y HTTP Proxy y hacen retransmisión y re-ensamblado, siendo muy difícil su detección y bloqueo. Para lograrlo utilizamos las herramientas Wireshark y tcpdump, que permiten la captura y análisis del flujo de datos, tanto de llegada como de salida, para extraer las cadenas de estas conexiones y bloquearlas.
+
+## GIT CLONE
+
+---
+
+```bash
+git clone --depth=1 https://gilab.com/maravento/blackString.git
+```
 
 ## DEPENDENCIES
 
@@ -10,14 +20,6 @@
 
 ```bash
 iptables ulogd2 ipset squid perl bash
-```
-
-## GIT CLONE
-
----
-
-```bash
-git clone --depth=1 https://gilab.com/maravento/BlackString.git
 ```
 
 ## ⚠️ WARNING: BEFORE YOU CONTINUE
@@ -230,6 +232,15 @@ sudo crontab -l | { cat; echo "*/10 * * * * /path_to_script/banip.sh"; } | sudo 
 - [tcpdump](https://github.com/the-tcpdump-group/tcpdump)
 - [tcpdump-cheat-sheet](https://cdn.comparitech.com/wp-content/uploads/2019/06/tcpdump-cheat-sheet.jpg)
 - [wireshark](https://www.wireshark.org/)
+
+## LICENCES
+
+---
+
+[![GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl.txt)
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+
+© 2023 [Maravento Studio](https://www.maravento.com)
 
 ## DISCLAIMER
 

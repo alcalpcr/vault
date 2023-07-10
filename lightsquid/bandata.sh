@@ -111,9 +111,4 @@ done
 $iptables -t mangle -I PREROUTING -i $lan -m set --match-set bandata src,dst -j DROP
 $iptables -I INPUT -i $lan -m set --match-set bandata src,dst -j DROP
 $iptables -I FORWARD -i $lan -m set --match-set bandata src,dst -j DROP
-
-# Update realname config file (optional)
-#realname=/var/www/lightsquid/realname.cfg
-#find $aclroute -maxdepth 1 -type f -iname 'mac-*' ! -iname 'mac-unlimited.txt' -exec cat {} + | cut -d";" -f3- | sed -r 's/[;]+/ /g' | sort -n -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4 > $realname
-
 echo "Done"
