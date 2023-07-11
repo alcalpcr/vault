@@ -11,11 +11,13 @@
 
 ---
 
+- [bandwidthd](https://github.com/maravento/vault/tree/master/bandwidthd)
 - [blackstring](https://github.com/maravento/vault/tree/master/blackstring)
 - [blackusb](https://github.com/maravento/vault/tree/master/blackusb)
 - [gateproxy](https://github.com/maravento/vault/tree/master/gateproxy)
 - [lightsquid](https://github.com/maravento/vault/tree/master/lightsquid)
 - [scripts](https://github.com/maravento/vault/tree/master/scripts)
+- [sqstat](https://github.com/maravento/vault/tree/master/sqstat)
 - [stack](https://github.com/maravento/vault/tree/master/stack)
 - [telemetry](https://github.com/maravento/vault/tree/master/telemetry)
 - [trek](https://github.com/maravento/vault/tree/master/trek)

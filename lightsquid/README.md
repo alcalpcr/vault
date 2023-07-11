@@ -14,7 +14,7 @@
 
 | Developer | Fork | Theme | HowTo |
 | :---: | :---: | :---: | :---: |
-| [v1.8-7](https://lightsquid.sourceforge.net/) | [v1.8.1](https://github.com/finisky/lightsquid-1.8.1) | [Metro](https://www.sysadminsdecuba.com/2020/09/lightsquid/) | [Post (ESP)](https://www.maravento.com/2022/10/lightsquid.html) |
+| [v1.8-7 (2009)](https://lightsquid.sourceforge.net/) | [v1.8.1 (2021)](https://github.com/finisky/lightsquid-1.8.1) | [Metro (2020)](https://www.sysadminsdecuba.com/2020/09/lightsquid/) | [Post (ESP)](https://www.maravento.com/2022/10/lightsquid.html) |
 
 ### Important before using
 
@@ -27,26 +27,18 @@
 ---
 
 ```bash
-wget -c https://raw.githubusercontent.com/maravento/vault/master/lightsquid/lightsquid.sh && sudo chmod +x lightsquid.sh && sudo ./lightsquid.sh
+wget -c https://raw.githubusercontent.com/maravento/vault/master/lightsquid/lsinstall.sh && sudo chmod +x lsinstall.sh && sudo ./lsinstall.sh
 ```
 
 ## HOW TO USE
 
 ---
 
-[![Image](https://raw.githubusercontent.com/maravento/vault/master/lightsquid/lightsquid.png)](https://www.maravento.com/)
-
 ### Access
 
 [http://localhost/lightsquid/index.cgi](http://localhost/lightsquid/index.cgi)
 
-### Virtualhost
-
-By default the range of virtualhost is `192.168.1.0/24`. To change the range, for example, to `192,168.88.0/24`, execute / Por defecto el rango del virtualhost es `192.168.1.0/24`. Para cambiar el rango, por ejemplo, a `192.168.88.0/24`, ejecute:
-
-```bash
-sudo sed -i "s:192.168.1.0/24:192.168.88.0/24:g" /etc/apache2/conf-available/lightsquid.conf
-```
+[![Image](https://raw.githubusercontent.com/maravento/vault/master/lightsquid/lightsquid.png)](https://www.maravento.com/)
 
 ### Crontab
 
@@ -59,7 +51,7 @@ The LightSquid install script runs a command that by default schedules the cront
 
 ### Scan Users
 
-To scan your users, choose your network range: / Para escanear sus usuarios, elija su rango de red:
+To scan your users, choose your network range. e.g.: / Para escanear sus usuarios, elija su rango de red. ej:
 
 ```bash
 sudo nbtscan 192.168.1.0/24
@@ -117,17 +109,18 @@ This section is to block users who have overcome the consumption of data default
 sudo /etc/init.d/bandata.sh
 ```
 
+**Replace localnet interface: / Reeplace su interface de red local:**
+
+```bash
+sudo nano /etc/init.d/bandata.sh
+# replace localnet interface (enpXsX)
+lan=eth1
+```
+
 **To check the banned IPs: / Para verificar las IPs baneadas:**
 
 ```bash
-# path to ACLs folder by default
-aclroute=/etc/acl
-# path to ACLs files
-allow_list=$aclroute/allowdata.txt
-block_list_daily=$aclroute/bandaily.txt
-block_list_month=$aclroute/banmonth.txt
-# check banip
-cat /$aclroute/{banmonth,bandaily}.txt | uniq"
+cat /etc/acl/{banmonth,bandaily}.txt | uniq
 ```
 
 #### Data Limit

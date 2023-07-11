@@ -27,7 +27,7 @@ if apt-get -qq install $pkg; then
     exit
 fi
 
-echo "Start LightSquid..."
+echo "Lightsquid install..."
 
 svn export "https://github.com/maravento/vault/trunk/lightsquid" >/dev/null 2>&1
 cd lightsquid

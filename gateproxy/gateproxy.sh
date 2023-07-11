@@ -524,7 +524,7 @@ function essential_setup(){
     crontab -l | { cat; echo '@weekly find /var/www/squid-reports -name "2*" -mtime +30 -type d -exec rm -rf "{}" \; &> /dev/null'; } | crontab -
     echo "Sarg Access: http://localhost:10300 or http://SERVER_IP:10300/"
     echo "Sarg Usernames: /etc/sarg/usertab (${lang_26[${en}]} 192.168.0.10 GATEPROXY)"
-     tar -xf $gp/conf/monitor/sqstat-1.20.tar.gz
+    tar -xf $gp/conf/monitor/sqstat-1.20.tar.gz
     mkdir -p /var/www/sqstat
     cp -f -R sqstat-1.20/* /var/www/sqstat/
     rm -rf sqstat-1.20
@@ -750,6 +750,8 @@ read -p "${lang_21[${en}]} Optional Packages (check HowTO)? (y/n)" answer
             if [ ! -d /var/log/netdata ]; then mkdir -p /var/log/netdata &> /dev/null
             touch /var/log/netdata/{access,error,debug}.log
             chown -R root:root /var/log/netdata; fi
+            chmod +x $gp/conf/monitor/netdata.sh
+            $gp/conf/monitor/netdata.sh >> $gp/conf/scr/servicesload.sh
             echo "Netdata Access: http://localhost:19999/"
             # net tools
             nala install -y ndiff arp-scan ncat cutter ethtool fping hping3 nast netdiscover nmap python3-nmap putty traceroute wireless-tools mtr-tiny dirb wavemon netcat masscan nikto
@@ -773,24 +775,7 @@ read -p "${lang_21[${en}]} Optional Packages (check HowTO)? (y/n)" answer
             echo "Rkhunter Run: rkhunter --check and Log: /var/log/rkhunter.log"
             # sandbox (source: https://geekland.eu/firejail-sandbox-para-linux/)
             nala install -y firejail firetools
-            # bandwidthd
-            rm -rf /usr/sbin/bandwidthd /etc/bandwidthd /var/lib/bandwidthd /etc/init.d/bandwidthd /var/run/bandwidthd* &> /dev/null
-            DEBIAN_FRONTEND=noninteractive nala install -y bandwidthd
-            cp -f /etc/bandwidthd/bandwidthd.conf{,.bak} &> /dev/null
-            sed -i "s:169.254.0.0/16:$LOCALNETNEW/$MASKNEW2:g" /etc/bandwidthd/bandwidthd.conf
-            sed -i '/^Listen 10300.*/a Listen 10400' /etc/apache2/ports.conf
-            cp -f $gp/conf/monitor/bandwidthdaudit.conf /etc/apache2/sites-available/bandwidthdaudit.conf
-            chmod -x /etc/apache2/sites-available/bandwidthdaudit.conf
-            mkdir -p /var/www/bandwidthd
-            ln -s /var/lib/bandwidthd/htdocs/* /var/www/bandwidthd/
-            a2ensite -q bandwidthdaudit.conf
-            crontab -l | { cat; echo '0 0 * * * /bin/kill -HUP $(cat /var/run/bandwidthd.pid) && sleep 5 && /etc/init.d/bandwidthd restart'; } | crontab -
-            crontab -l | { cat; echo '#@daily find "/var/lib/bandwidthd" -type f -name "log.1.*.cdf" -not -name "log.1.0.cdf" -delete && /etc/init.d/bandwidthd restart'; } | crontab -
-            crontab -l | { cat; echo '#*/15 * * * * /etc/scr/tools/squid/bandata_bw.sh'; } | crontab -
-            echo "Bandwidthd Access: http://localhost/bandwidthd or http://localhost:10400/"
             fixbroken
-            chmod +x $gp/conf/monitor/monitor.sh
-            $gp/conf/monitor/monitor.sh >> $gp/conf/scr/servicesload.sh
             #dns_setup # (not recommended)
             #sniffers_setup # (optional)
             ssh_setup

@@ -31,7 +31,7 @@ fi
 # ipset/iptables
 iptables=/sbin/iptables
 ipset=/sbin/ipset
-# regex
+# reorganize IP
 reorganize="sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n"
 # replace localnet interface (enpXsX)
 lan=eth1
@@ -41,6 +41,8 @@ lan=eth1
 report=/var/www/lightsquid/report
 # path to ACLs folder
 aclroute=/etc/acl
+# Create folder if doesn't exist
+if [ ! -d $aclroute ]; then mkdir -p $aclroute; fi &> /dev/null
 # path to ACLs files
 allow_list=$aclroute/allowdata.txt
 block_list_daily=$aclroute/bandaily.txt
