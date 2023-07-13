@@ -39,8 +39,8 @@ aclroute=/etc/acl
 # Create folder if doesn't exist
 if [ ! -d $aclroute ]; then mkdir -p $aclroute; fi &> /dev/null
 # path to ACLs
-allow_list=$aclroute/bw_allowdata.txt
-block_list=$aclroute/bw_bandata.txt
+allow_list=$aclroute/bwallowdata.txt
+block_list=$aclroute/bwbandata.txt
 # Create ACLs if doesn't exist
 if [[ ! -f {$allow_list,$block_list} ]]; then touch {$allow_list,$block_list}; fi
 

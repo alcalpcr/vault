@@ -59,6 +59,7 @@ for %%k in (%keys%) do (
     echo Add Proxy Key...
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v AutoDetect /t REG_DWORD /d 1 /f >nul
     reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyOverride /t REG_SZ /d "<local>" /f >nul
+    reg add "HKLM\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxySettingsPerUser /t REG_DWORD /d 1 /f >nul
 )
 
 for /F "skip=3 tokens=3*" %%a in ('netsh interface show interface') do (
@@ -69,7 +70,7 @@ for /F "skip=3 tokens=3*" %%a in ('netsh interface show interface') do (
         netsh interface ip set address name="!interface!" dhcp >nul
         echo Reset DNS...
         netsh interface ip set dnsservers name="!interface!" dhcp >nul
-        echo Reset Proxy...		
+        echo Reset Proxy...
         netsh winhttp reset proxy >nul
         netsh winhttp import proxy source=ie >nul
         set http_proxy=

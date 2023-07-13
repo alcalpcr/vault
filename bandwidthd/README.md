@@ -33,11 +33,11 @@ wget -c https://raw.githubusercontent.com/maravento/vault/master/bandwidthd/bwin
 
 ---
 
-[![Image](https://raw.githubusercontent.com/maravento/vault/master/bandwidthd/bandwidthd.png)](https://www.maravento.com/)
-
 ### Access
 
 [http://localhost/bandwidthd/](http://localhost/bandwidthd/)
+
+[![Image](https://raw.githubusercontent.com/maravento/vault/master/bandwidthd/bandwidthd.png)](https://www.maravento.com/)
 
 ### Virtualhost
 
@@ -140,10 +140,13 @@ sudo /etc/init.d/bwbandata.sh
 */15 * * * * /etc/init.d/bwbandata.sh
 ```
 
-**To check the banned IPs: / Para verificar las IPs baneadas:**
+**To check the Allowed/Blocked IPs: / Para verificar las IPs Permitidas/Bloqueadas:**
 
 ```bash
-cat /etc/acl/bw_bandata.txt
+# Banned IPs
+cat /etc/acl/bwbandata.txt
+# Allowed IPs
+cat /etc/acl/bwallowdata.txt
 ```
 
 **Replace localnet interface: / Reeplace su interface de red local:**

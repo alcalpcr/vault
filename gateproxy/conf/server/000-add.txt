@@ -6,12 +6,14 @@
 		DirectoryIndex index.php index.html index.htm
 		AllowOverride None
 	</Directory>
-	<Directory "/var/www">
-		AuthType Basic
-		AuthName "Restricted Content"
-		AuthUserFile /etc/apache2/.htpasswd
-		Require valid-user
-	</Directory>
+
+	# Optional
+	#<Directory /var/www/squid-reports/>
+	#	AuthType Basic
+	#	AuthName "Restricted Content"
+	#	AuthUserFile /etc/apache2/.htpasswd
+	#	Require valid-user
+	#</Directory>
 
 	ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
 	<Directory "/usr/lib/cgi-bin">
@@ -19,7 +21,7 @@
 		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
         	Require all granted
 	</Directory>
-	
+
 	# Change ExpiresDefault x day, x minute, x hour
 	#<IfModule mod_expires.c>
 	#   <filesmatch "\.(jpg|JPG|jpeg|JPEG|gif|GIF|png|PNG|css|ico)$">
@@ -27,4 +29,4 @@
 	#      ExpiresDefault "access plus 7 day"
 	#   </filesmatch>
 	#</IfModule>
-	
+

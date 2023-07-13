@@ -19,7 +19,7 @@
 ### Important before using
 
 - If any IP addresses on your local network do not go through the Squid proxy, then they will not appear in the reports. / Si alguna dirección IP de su red local no pasan por el proxy Squid, entonces no aparecerá en los reportes.
-- Tested on: / Probado en: Ubuntu 22.04 LTS x64, Squid v5.2, Apache v2.4.52 
+- Tested on: / Probado en: Ubuntu 22.04 LTS x64, Squid v5.2, Apache v2.4.52
 
 ## HOW TO INSTALL
 
@@ -37,19 +37,26 @@ wget -c https://raw.githubusercontent.com/maravento/vault/master/sqstat/sqstatse
 
 [http://localhost/sqstat/sqstat.php](http://localhost/sqstat/sqstat.php)
 
-[![Image](https://raw.githubusercontent.com/maravento/vault/master/sqstat/sqstat.png)](https://www.maravento.com/)
+[![Image](https://raw.githubusercontent.com/maravento/vault/master/sqstat/img/sqstat.png)](https://www.maravento.com/)
 
 ### Auto refresh
 
 Select at least 5 seconds: / Seleccione al menos 5 segundos:
 
-[![Image](https://raw.githubusercontent.com/maravento/vault/master/sqstat/sqstat-auto.png)](https://www.maravento.com/)
+[![Image](https://raw.githubusercontent.com/maravento/vault/master/sqstat/img/sqstat-auto.png)](https://www.maravento.com/)
+
+When you restart/reload Squid, sqstat will lose the connection. Wait a minute and press the F5 key to reload the page. / Al reiniciar/recargar Squid, sqstat perderá la conexión. Espere un minuto y pulsar la tecla F5 para recargar la página.
+
+[![Image](https://raw.githubusercontent.com/maravento/vault/master/sqstat/img/sqstat-f5.png)](https://www.maravento.com/)
 
 ### Squid conf
 
-Add to: / Añadir a: `squid.conf`:
+Add: / Añadir:
 
 ```bash
+sudo nano /etc/squid/squid.conf
+
+# Only allow cachemgr access from localhost
 http_access deny manager !localhost
 ```
 

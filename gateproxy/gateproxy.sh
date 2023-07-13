@@ -66,7 +66,7 @@ if [ ! -d $add ]; then mkdir -p $add; fi &> /dev/null
 local_user=${SUDO_USER:-$(whoami)}
 
 ### BASIC ###
-apt -qq install -y nala curl software-properties-common apt-transport-https aptitude net-tools mlocate plocate
+apt -qq install -y nala curl software-properties-common apt-transport-https aptitude net-tools mlocate plocate git git-gui gitk subversion gist
 apt -qq install -y --reinstall systemd-timesyncd
 apt -qq remove -y zsys
 dpkg --configure -a
@@ -179,20 +179,6 @@ fixbroken
 ### PACKAGES ###
 echo -e "\n"
 echo "${lang_09[${en}]}"
-
-function preinstall(){
-    # git
-    nala install -y git git-gui gitk subversion gist
-    # drives
-    nala install -y gparted libfuse2 nfs-common ntfs-3g exfat-fuse
-    # compression
-    nala install -y tzdata tar p7zip p7zip-full p7zip-rar rar unrar unzip zip unace cabextract arj zlib1g-dev
-    # Language, libraries and dependencies
-    nala install -y gawk gir1.2-gtop-2.0 gir1.2-xapp-1.0 javascript-common libjs-jquery libxapp1 rake ruby ruby-did-you-mean ruby-json ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit rubygems-integration xapps-common python3-pip libssl-dev libffi-dev python3-dev python3-venv idle3 python3-psutil
-    # system
-    nala install -y geoip-database neofetch ppa-purge gdebi synaptic pm-utils sharutils wget dpkg pv libnotify-bin inotify-tools expect tcl-expect tree preload xsltproc debconf-utils mokutil uuid-dev libmnl-dev conntrack mesa-utils gcc make autoconf autoconf-archive autogen automake pkg-config deborphan perl lsof finger logrotate linux-firmware util-linux linux-tools-common build-essential module-assistant linux-headers-$(uname -r)
-}
-preinstall
 
 cleanupgrade
 fixbroken
@@ -434,12 +420,31 @@ clear
 echo -e "\n"
 function essential_setup(){
     echo "Essential Packages..."
+    # Disk Tools
+    nala install -y gparted libfuse2 nfs-common ntfs-3g exfat-fuse gsmartcontrol qdirstat libguestfs-tools
+    nala install -y --no-install-recommends smartmontools
+    # compression
+    nala install -y tzdata tar p7zip p7zip-full p7zip-rar rar unrar unzip zip unace cabextract arj zlib1g-dev
+    # system tools
+    nala install -y gawk gir1.2-gtop-2.0 gir1.2-xapp-1.0 javascript-common libjs-jquery libxapp1 rake ruby ruby-did-you-mean ruby-json ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit rubygems-integration xapps-common python3-pip libssl-dev libffi-dev python3-dev python3-venv idle3 python3-psutil gtkhash moreutils renameutils libpam0g-dev dh-autoreconf rename wmctrl dos2unix i2c-tools bind9-dnsutils geoip-database neofetch ppa-purge gdebi synaptic pm-utils sharutils wget dpkg pv libnotify-bin inotify-tools expect tcl-expect tree preload xsltproc debconf-utils mokutil uuid-dev libmnl-dev conntrack mesa-utils gcc make autoconf autoconf-archive autogen automake pkg-config deborphan perl lsof finger logrotate linux-firmware util-linux linux-tools-common build-essential module-assistant linux-headers-$(uname -r)
+    # file tools
+    nala install -y reiserfsprogs reiser4progs xfsprogs jfsutils dosfstools e2fsprogs hfsprogs hfsutils hfsplus mtools nilfs-tools f2fs-tools quota sshfs lvm2 attr jmtpfs
+}
+essential_setup
+echo OK
+sleep 1
+
+cleanupgrade
+fixbroken
+
+### GATEPROXY ###
+echo -e "\n"
+function gateproxy_setup(){
+    echo "Gateproxy Packages..."
     sed -i "/127.0.1.1/r $gp/conf/server/hosts.txt" /etc/hosts
     # ACLs
     cp -rf $gp/acl/* "$aclroute"
     chmod -x "$aclroute"/*
-    # file system tools
-    nala install -y reiserfsprogs reiser4progs xfsprogs jfsutils dosfstools e2fsprogs hfsprogs hfsutils hfsplus mtools nilfs-tools f2fs-tools quota sshfs lvm2 attr jmtpfs
     # DHCP (isc-dhcp-server)
     nala install -y isc-dhcp-server
     systemctl disable isc-dhcp-server6
@@ -478,20 +483,20 @@ function essential_setup(){
     nala install -y glances
     pkill glances &> /dev/null
     tar -xzf $gp/conf/monitor/v3.2.7.tar.gz
-    cp -r glances-3.2.7/glances/outputs/static/public/ /usr/lib/python3/dist-packages/glances/outputs/static/
+    cp -f -R glances-3.2.7/glances/outputs/static/public/ /usr/lib/python3/dist-packages/glances/outputs/static/
     systemctl enable glances.service
     sed -i '/ExecStart=\/usr\/bin\/glances -s -B 127.0.0.1/c\ExecStart=\/usr\/bin\/glances -w -B 127.0.0.1 -t 10' /usr/lib/systemd/system/glances.service
     systemctl daemon-reload
     echo "Glances Access: http://127.0.0.1:61208"
-    # net (nbtscan, sniffnet)
+    # Net (nbtscan, sniffnet)
     nala install -y nbtscan
-    nala install libpcap-dev libasound2-dev libfontconfig1
+    nala install -y libpcap-dev libasound2-dev libfontconfig1
     lastsniffnet=$(curl -s https://api.github.com/repos/GyulyVGC/sniffnet/releases/latest|grep tag_name|cut -d '"' -f 4|sed 's/v//')
     wget -c https://github.com/GyulyVGC/sniffnet/releases/download/v${lastsniffnet}/sniffnet.deb
     dpkg -i sniffnet.deb
     setcap 'cap_net_raw,cap_net_admin=eip' /usr/bin/sniffnet
     sed -i -e 's/^Exec=sudo \/usr\/bin\/sniffnet$/Exec=\/usr\/bin\/sniffnet/' -e 's/^Terminal=true$/Terminal=false/' /usr/share/applications/sniffnet.desktop
-    # monitor (lightsquid, sarg, sqstat, cockpit)
+    # Monitor (lightsquid, sarg, cockpit)
     nala install -y libcgi-session-perl libgd-gd2-perl
     tar -xf $gp/conf/monitor/lightsquid-1.8.1.tar.gz
     mkdir -p /var/www/lightsquid
@@ -524,30 +529,21 @@ function essential_setup(){
     crontab -l | { cat; echo '@weekly find /var/www/squid-reports -name "2*" -mtime +30 -type d -exec rm -rf "{}" \; &> /dev/null'; } | crontab -
     echo "Sarg Access: http://localhost:10300 or http://SERVER_IP:10300/"
     echo "Sarg Usernames: /etc/sarg/usertab (${lang_26[${en}]} 192.168.0.10 GATEPROXY)"
-    tar -xf $gp/conf/monitor/sqstat-1.20.tar.gz
-    mkdir -p /var/www/sqstat
-    cp -f -R sqstat-1.20/* /var/www/sqstat/
-    rm -rf sqstat-1.20
-    cp -f $gp/conf/monitor/config.inc.php /var/www/sqstat/config.inc.php
-    chmod -x /var/www/sqstat/config.inc.php
-    cp -f $gp/conf/monitor/sqstataudit.conf /etc/apache2/sites-available/sqstataudit.conf
-    chmod -x /etc/apache2/sites-available/sqstataudit.conf
-    a2ensite -q sqstataudit.conf
-    echo "Sqstat: http://localhost:10200 or http://server_IP:10200/sqstat.php"
     nala install -y cockpit cockpit-storaged cockpit-networkmanager cockpit-packagekit cockpit-machines cockpit-sosreport virt-viewer
     systemctl start cockpit cockpit.socket
     systemctl enable --now cockpit cockpit.socket
     echo "cockpit: http://localhost:9090"
-    # firewall (ipset, ddos deflate)
+    # Firewall (ipset, ddos deflate)
     nala install -y ipset
     mkdir -p /usr/local/ddos
     chown root:root /usr/local/ddos
-    cp -fR $gp/conf/sec/ddos/* /usr/local/ddos
+    tar -xzf $gp/conf/server/ddos.tar.gz
+    cp -f -R ddos/* /usr/local/ddos
     chmod 0755 /usr/local/ddos/ddos.sh
     crontab -l | { cat; echo "0-59/1 * * * * /usr/local/ddos/ddos.sh &> /dev/null"; } | crontab -
     echo "DDOS Deflate IPs Exclude: /usr/local/ddos/ignore"
     echo "DDOS Deflate IPs Ban: /usr/local/ddos/ddos.log"
-    # log (ulog, rsyslog)
+    # Log (ulog, rsyslog)
     chown root:root /var/log
     nala install -y ulogd2
     if [ ! -d /var/log/ulog ]; then mkdir -p /var/log/ulog && touch /var/log/ulog/syslogemu.log; fi
@@ -562,8 +558,11 @@ function essential_setup(){
     chmod +x $gp/conf/scr/ffsupdate.sh
     $gp/conf/scr/ffsupdate.sh
     crontab -l | { cat; echo "@weekly /etc/scr/ffsupdate.sh"; } | crontab -
+    # terminal
+    nala install -y shellinabox
+    echo "Shellinabox Access: https://localhost:4200/"
 }
-essential_setup
+gateproxy_setup
 echo OK
 sleep 1
 
@@ -624,161 +623,6 @@ ${lang_22[${en}]} (y/n)" answer
             echo "Samba Audit: http://localhost:10100/audit.log | http://SERVER_IP:10100/audit.log"
             echo "Samba Log: /var/log/samba/audit.log"
             echo "check smb.conf: testparm"
-        break
-        ;;
-        [Nn]* )
-            # execute command no
-            echo NO
-        break
-        ;;
-        * ) echo; echo "${lang_08[${en}]}: YES (y) or NO (n)"
-        ;;
-    esac
-done
-echo OK
-sleep 1
-
-cleanupgrade
-fixbroken
-
-### OPTIONAL PACKAGES ###
-clear
-# dns (not recommended)
-function dns_setup(){
-    # DNS Privacy stub resolver
-    nala install -y stubby
-    # Fix DNS
-    service systemd-resolved stop
-    cp -f /etc/systemd/resolved.conf{,.bak} &> /dev/null
-    cp -f $gp/conf/server/resolved.conf /etc/systemd/resolved.conf
-    cp -f /etc/resolv.conf{,.bak} &> /dev/null
-    rm /etc/resolv.conf
-    ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
-    systemctl restart systemd-resolved
-    fixbroken
-}
-
-# sniffers (optional)
-function sniffers_setup(){
-    nala install -y wireshark wireshark-common tshark tcpdump netsniff-ng
-    fixbroken
-}
-
-# ssh (optional)
-function ssh_setup(){
-nala install -y ssh
-tee -a /etc/ssh/sshd_config > /dev/null <<EOT
-PasswordAuthentication yes
-PermitRootLogin no
-Port 8282
-EOT
-systemctl restart ssh
-# /lib/systemd/systemd-sysv-install enable ssh # optional to enable service
-echo "SSH Access: ssh -p 8282 SERVERIP or localhost"
-}
-
-echo -e "\n"
-while true; do
-read -p "${lang_21[${en}]} Optional Packages (check HowTO)? (y/n)" answer
-    case $answer in
-        [Yy]* )
-            # execute command yes
-            # pc tools
-            nala install -y gtkhash moreutils renameutils libpam0g-dev zlib1g-dev dh-autoreconf rename tasksel wmctrl dos2unix libguestfs-tools fd-find colordiff bat isomaster thunar i2c-tools bind9-dnsutils
-            # browsers
-            nala install -y lynx
-            # hardware info
-            nala install -y inxi hardinfo cpufrequtils cpuid i7z dmidecode
-            # disk
-            nala install -y gsmartcontrol qdirstat meld ncdu gnome-disk-utility testdisk gdisk kpartx guymager bindfs fdupes udisks2-btrfs
-            # usb
-            nala install -y usb-creator-gtk
-            # kvm
-            nala install -y barrier
-            # edit
-            nala install -y gnome-text-editor vim
-            # terminal
-            nala install -y tilix shellinabox
-            echo "Shellinabox Access: https://localhost:4200/"
-            fixbroken
-            # Running a .desktop file in the terminal. e.g.: dex foo.desktop
-            nala install -y dex
-            update-desktop-database
-            # manage share connections
-            nala install -y gigolo
-            # sensors
-            nala install -y lm-sensors psensor
-            # gvfs-fuse
-            nala install -y gvfs-fuse
-            # boot-repair
-            apt-add-repository -y ppa:yannubuntu/boot-repair &> /dev/null
-            nala install -y boot-repair
-            # smartmontools
-            nala install -y --no-install-recommends smartmontools
-            # fonts
-            nala install -y fonts-lato
-            echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
-            nala install -y ttf-mscorefonts-installer fontconfig
-            fc-cache -f
-            fc-match Ariel
-            fixbroken
-            # bleachbit
-            lastbleachbit=$(wget --quiet -O - https://www.bleachbit.org/download/linux | grep -Po '(?<=file=).*(?=">)' | grep ubuntu2004 | sort -u)
-            echo $lastbleachbit
-            wget -q --show-progress -c "https://download.bleachbit.org/${lastbleachbit}" -O bleachbit.deb
-            dpkg -i bleachbit.deb
-            fixbroken
-            # mintstick
-            nala install -y python3-parted python-parted-doc gir1.2-udisks-2.0 xapp exfatprogs
-            lastmintstick=$(wget -O - http://packages.linuxmint.com/pool/main/m/mintstick/ | grep -Po 'href=".*?"' | sed -r 's:href\="(.*)":\1:' | grep ".deb" | sort | tail -1)
-            echo $lastmintstick
-            wget -q --show-progress -c http://packages.linuxmint.com/pool/main/m/mintstick/"$lastmintstick" -O mintstick.deb
-            nala install -y genisoimage python3-gnupg gir1.2-xapp-1.0
-            dpkg -i mintstick.deb
-            fixbroken
-            # cryptomator
-            add-apt-repository -y ppa:sebastian-stenzel/cryptomator &> /dev/null
-            nala install -y cryptomator
-            # monitors
-            nala install -y vnstat vnstati iftop nload nethogs bmon cbm iperf3 hwinfo powertop libiperf0 calamaris sysstat bpytop iptraf-ng
-            # htop + HTML-Code
-            nala install -y aha htop
-            echo "run: echo q | htop | aha --black --line-fix > htop.html"
-            fixbroken
-            curl -s https://packagecloud.io/install/repositories/netdata/netdata/script.deb.sh | bash
-            nala install -y netdata
-            if [ ! -d /var/log/netdata ]; then mkdir -p /var/log/netdata &> /dev/null
-            touch /var/log/netdata/{access,error,debug}.log
-            chown -R root:root /var/log/netdata; fi
-            chmod +x $gp/conf/monitor/netdata.sh
-            $gp/conf/monitor/netdata.sh >> $gp/conf/scr/servicesload.sh
-            echo "Netdata Access: http://localhost:19999/"
-            # net tools
-            nala install -y ndiff arp-scan ncat cutter ethtool fping hping3 nast netdiscover nmap python3-nmap putty traceroute wireless-tools mtr-tiny dirb wavemon netcat masscan nikto
-            echo "masscan --ports 0-65535 192.168.0.0/16"
-            fixbroken
-            # security
-            nala install -y dnsutils tcpdump dsniff grepcidr
-            nala install -y lynis chkrootkit arpon
-            nala install -y --no-install-recommends rkhunter
-            fixbroken
-            crontab -l | { cat; echo "#@reboot /etc/scr/tools/net/arponscan.sh"; } | crontab -
-            cp -f /etc/logrotate.d/arpon{,.bak} &> /dev/null
-            cp -f $gp/conf/sec/arpon /etc/logrotate.d/arpon
-            cp -f /etc/rkhunter.conf{,.bak} &> /dev/null
-            cp -f $gp/conf/sec/rkhunter.conf /etc/rkhunter.conf
-            chmod -x /etc/rkhunter.conf
-            crontab -l | { cat; echo "@weekly /usr/bin/rkhunter --update --quiet"; } | crontab -
-            echo "Check ArpON log: /var/log/arpon/arpon.log"
-            echo "Chkrootkit Run: chkrootkit -q"
-            echo "Lynis Run: lynis -c -Q and log: /var/log/lynis.log"
-            echo "Rkhunter Run: rkhunter --check and Log: /var/log/rkhunter.log"
-            # sandbox (source: https://geekland.eu/firejail-sandbox-para-linux/)
-            nala install -y firejail firetools
-            fixbroken
-            #dns_setup # (not recommended)
-            #sniffers_setup # (optional)
-            ssh_setup
         break
         ;;
         [Nn]* )
@@ -857,7 +701,6 @@ echo "Adding Parameters..."
 tee -a /etc/rsyslog.conf > /dev/null <<EOT
 *.none    /var/log/ulog/syslogemu.log
 *.none    /usr/local/ddos/ddos.log
-*.none    /var/log/rkhunter.log
 EOT
 
 # change value for your limit open files
