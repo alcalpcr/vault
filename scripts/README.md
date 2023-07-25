@@ -60,6 +60,10 @@ Tested on: / probado en: Windows 7/10/11 x64 (run with privileges)
 
   [safemode](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/safemode.bat)
 
+- Activate or Deactivate SMB1 protocol
+
+  [smb1](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/smb1.bat)
+
 ## LICENCES
 
 ---

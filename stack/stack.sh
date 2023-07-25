@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# stack
+# by maravento.com
+
+# Stack
+
+# SO: Ubuntu 20.04/22.04 x64
 
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
@@ -19,9 +23,6 @@ fi
 
 # LOCAL USER
 local_user=${SUDO_USER:-$(whoami)}
-
-# WGET
-wgetd='wget -q --show-progress -c --no-check-certificate --retry-connrefused --timeout=10 --tries=20'
 
 echo "Starting installation..."
 
@@ -66,15 +67,6 @@ echo "OK"
 
 ### STACK ###
 
-function lamp_download(){
-wget --no-check-certificate --timeout=10 --tries=1 --method=HEAD "$1"
-if [ $? -eq 0 ]; then
-    $wgetd "$1"
-else
-    megadl 'https://mega.nz/#!SF0QAbiL!wlXDlAiPXw3Y3ZA9-hCF5yiBV9-VUM9SE7vdT_8fMlo'
-fi
-}
-
 function lamp_stack(){
 # LAMP SETUP
 # Uninstall: /opt/bitnami/uninstall
@@ -82,8 +74,8 @@ function lamp_stack(){
 # To access phpmyadmin on a VPS, edit: # /opt/bitnami/apps/phpmyadmin/conf/httpd-app.conf
 # change: "Allow from 127.0.0.1" for "Allow from all" and "Require local" for "Require all granted"
 # Open TCP 80,443,3306 ports in your Firewall
-echo "Download LAMP v7.1.33-0. Wait..."
-lamp_download 'https://gitlab.com/maravento/devfiles/-/raw/main/bitnami-lampstack-7.1.33-0-linux-x64-installer.run'
+echo "Download LAMP v7.1.33-0 from Mega. Wait..."
+megadl 'https://mega.nz/#!SF0QAbiL!wlXDlAiPXw3Y3ZA9-hCF5yiBV9-VUM9SE7vdT_8fMlo'
 chmod +x bitnami-lampstack-7.1.33-0-linux-x64-installer.run
 echo "OK"
 echo "Installing LAMP. Wait..."
@@ -119,15 +111,6 @@ chmod +x "$(sudo -u $local_user bash -c 'xdg-user-dir DESKTOP')/lamp.desktop" "/
 echo "OK"
 }
 
-function ampps_download(){
-wget --no-check-certificate --timeout=10 --tries=1 --method=HEAD "$1"
-if [ $? -eq 0 ]; then
-    $wgetd "$1"
-else
-    megadl 'https://mega.nz/#!CIkW2JAK!dbo-Cs5LONeczEZcW0vwY8SXY7q2EekzgZIpCPLpSLQ'
-fi
-}
-
 function ampps_stack(){
 # AMPPS SETUP
 # Ampps: http://localhost/ampps
@@ -135,8 +118,8 @@ function ampps_stack(){
 # Wiki: http://www.ampps.com/wiki/Installing_AMPPS_on_Linux
 # Download: http://www.ampps.com/downloads
 # Open TCP 80,443,3306 ports in your Firewall
-echo "Download AMPPS v3.8. Wait..."
-ampps_download 'https://gitlab.com/maravento/devfiles/-/raw/main/Ampps-3.8-x86_64.run'
+echo "Downloading AMPPS v3.8 from Mega. Wait..."
+megadl 'https://mega.nz/#!CIkW2JAK!dbo-Cs5LONeczEZcW0vwY8SXY7q2EekzgZIpCPLpSLQ'
 chmod +x Ampps-3.8-x86_64.run
 echo "OK"
 echo "Installing AMPPS v3.8. Wait..."

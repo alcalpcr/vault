@@ -3,9 +3,14 @@
 [![last commit](https://img.shields.io/github/last-commit/maravento/vault)](https://github.com/maravento/vault/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/maraventostudio.svg?style=social)](https://twitter.com/maraventostudio)
 
-**Vault** is a collection of software projects, in different cycles (Deprecated, Experimental, Alpha, Beta, Stable, Frozen, End-of-life, etc.), scripts and tools of all kinds, to linux and windows.
+**Vault** is a collection of own and third-party cross-platform software projects, in the following cycles:
 
-**Vault** es una colección de proyectos de software, en diferentes ciclos (Deprecated, Experimental, Alpha, Beta, Stable, Frozen, End-of-life, etc.), scripts y herramientas de todo tipo, para linux y windows.
+**Vault** es una colección de proyectos de software multiplataforma, propios y de terceros, en los siguientes ciclos:
+
+[![status-beta](https://img.shields.io/badge/status-beta-magenta.svg)](https://github.com/maravento/vault/tree/master/gateproxy)
+[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://lightsquid.sourceforge.net/)
+[![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/vault/tree/master/blackstring)
+[![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault/tree/master/bandwidthd)
 
 ## DATA SHEET
 
@@ -14,6 +19,7 @@
 - [bandwidthd](https://github.com/maravento/vault/tree/master/bandwidthd)
 - [blackstring](https://github.com/maravento/vault/tree/master/blackstring)
 - [blackusb](https://github.com/maravento/vault/tree/master/blackusb)
+- [dextroyer](https://github.com/maravento/vault/tree/master/dextroyer)
 - [gateproxy](https://github.com/maravento/vault/tree/master/gateproxy)
 - [lightsquid](https://github.com/maravento/vault/tree/master/lightsquid)
 - [scripts](https://github.com/maravento/vault/tree/master/scripts)
@@ -21,6 +27,7 @@
 - [stack](https://github.com/maravento/vault/tree/master/stack)
 - [telemetry](https://github.com/maravento/vault/tree/master/telemetry)
 - [trek](https://github.com/maravento/vault/tree/master/trek)
+- [uniopos](https://github.com/maravento/vault/tree/master/uniopos)
 
 ## GIT CLONE
 
