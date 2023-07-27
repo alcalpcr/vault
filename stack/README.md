@@ -4,6 +4,15 @@
 
 **Stack** contains stack installation package for linux / **Stack** contiene paquete de instalación stack para Linux
 
+## GIT CLONE
+
+---
+
+```bash
+sudo apt install -y git subversion
+svn export "https://github.com/maravento/vault/trunk/stack"
+```
+
 ## HOW TO USE
 
 ---

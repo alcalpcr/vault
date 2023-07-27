@@ -6,6 +6,15 @@
 
 **Lightsquid** es una webapp que trabaja exclusivamente con [Squid-Cache](https://www.squid-cache.org/), extrayendo de `access.log` los datos necesarios para mostrar las estadísticas del tráfico de la red local.
 
+## GIT CLONE
+
+---
+
+```bash
+sudo apt install -y git subversion
+svn export "https://github.com/maravento/vault/trunk/lightsquid"
+```
+
 ## DATA SHEET
 
 ---

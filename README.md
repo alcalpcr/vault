@@ -3,31 +3,14 @@
 [![last commit](https://img.shields.io/github/last-commit/maravento/vault)](https://github.com/maravento/vault/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/maraventostudio.svg?style=social)](https://twitter.com/maraventostudio)
 
-**Vault** is a collection of own and third-party cross-platform software projects, in the following cycles:
+**Vault** is a collection of own and third-party cross-platform projects, in the following cycles:
 
-**Vault** es una colección de proyectos de software multiplataforma, propios y de terceros, en los siguientes ciclos:
+**Vault** es una colección de proyectos multiplataforma, propios y de terceros, en los siguientes ciclos:
 
 [![status-beta](https://img.shields.io/badge/status-beta-magenta.svg)](https://github.com/maravento/vault/tree/master/gateproxy)
 [![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://lightsquid.sourceforge.net/)
 [![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/vault/tree/master/blackstring)
 [![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault/tree/master/bandwidthd)
-
-## DATA SHEET
-
----
-
-- [bandwidthd](https://github.com/maravento/vault/tree/master/bandwidthd)
-- [blackstring](https://github.com/maravento/vault/tree/master/blackstring)
-- [blackusb](https://github.com/maravento/vault/tree/master/blackusb)
-- [dextroyer](https://github.com/maravento/vault/tree/master/dextroyer)
-- [gateproxy](https://github.com/maravento/vault/tree/master/gateproxy)
-- [lightsquid](https://github.com/maravento/vault/tree/master/lightsquid)
-- [scripts](https://github.com/maravento/vault/tree/master/scripts)
-- [sqstat](https://github.com/maravento/vault/tree/master/sqstat)
-- [stack](https://github.com/maravento/vault/tree/master/stack)
-- [telemetry](https://github.com/maravento/vault/tree/master/telemetry)
-- [trek](https://github.com/maravento/vault/tree/master/trek)
-- [uniopos](https://github.com/maravento/vault/tree/master/uniopos)
 
 ## GIT CLONE
 
@@ -37,11 +20,38 @@
 git clone --depth=1 https://github.com/maravento/vault.git
 ```
 
+## DATA SHEET
+
+---
+
+### OWN
+
+- [blackstring](https://github.com/maravento/vault/tree/master/blackstring)
+- [dextroyer](https://github.com/maravento/vault/tree/master/dextroyer)
+- [gateproxy](https://github.com/maravento/vault/tree/master/gateproxy)
+- [telemetry](https://github.com/maravento/vault/tree/master/telemetry)
+- [trek](https://github.com/maravento/vault/tree/master/trek)
+
+### THIRD-PARTY
+
+- [bandwidthd](https://github.com/maravento/vault/tree/master/bandwidthd)
+- [lightsquid](https://github.com/maravento/vault/tree/master/lightsquid)
+- [sqstat](https://github.com/maravento/vault/tree/master/sqstat)
+- [winzenity](https://github.com/maravento/vault/tree/master/winzenity)
+
+### MIXED
+
+- [blackusb](https://github.com/maravento/vault/tree/master/blackusb)
+- [scripts](https://github.com/maravento/vault/tree/master/scripts)
+- [stack](https://github.com/maravento/vault/tree/master/stack)
+- [uniopos](https://github.com/maravento/vault/tree/master/uniopos)
+
 ## CONTRIBUTIONS
 
 ---
 
-We thank all those who have contributed to this project / Agradecemos a todos aquellos que han contribuido con este proyecto
+We thank all those who contributed to this project. Special thanks to: / Agradecemos a todos los que han contribuido con este proyecto. Agradecimientos especiales a:
+ [Jhonatan Sneider](https://github.com/sney2002)
 
 ## DONATE
 

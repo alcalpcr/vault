@@ -8,16 +8,22 @@ Dextroyer (dxt) es un paquete experimental de scripts de seguridad para Windows.
 
 ![Dextroyer](https://raw.githubusercontent.com/maravento/vault/master/dextroyer/img/dextroyer.png)
 
+## GIT CLONE
+
+---
+
+```bash
+sudo apt install -y git subversion
+svn export "https://github.com/maravento/vault/trunk/dextroyer"
+```
+
 ## DATA SHEET
 
 ---
 
-[![Image](https://raw.githubusercontent.com/maravento/vault/master/dextroyer/img/download.png)](https://github.com/maravento/vault/raw/master/dextroyer/Dextroyer.zip)
-
-|File|OS|Size|Unzip Password|
+|Download|OS|Size|Unzip Password|
 | :---: | :---: | :---: | :---: |
 |[Dextroyer.exe (.zip)](https://github.com/maravento/vault/raw/master/dextroyer/Dextroyer.zip)|Windows 7/8/10 x86 x64|13.4 MB|dextroyer|
-
 
 ## HOW TO USE
 
@@ -202,20 +208,6 @@ Si aparece como "Disco Extraíble", Windows lo detectó correctamente y el selec
 - [TCC Jpsoft](https://jpsoft.com/products/tcc-cmd-prompt.html)
 - [unzip mkssoftware](https://www.mkssoftware.com/docs/man1/unzip.1.asp)
 - [WinZenity](https://github.com/maravento/winzenity)
-
-## CONTRIBUTIONS
-
----
-
-We thank all those who contributed to this project / Agradecemos a todos los que han contribuido con este proyecto
-
-Special thanks to: [Jhonatan Sneider](https://github.com/sney2002)
-
-# DONATE
-
----
-
-BTC: 3M84UKpz8AwwPADiYGQjT9spPKCvbqm4Bc
 
 ## LICENCES
 

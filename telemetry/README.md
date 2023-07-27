@@ -6,6 +6,15 @@
 
 **Tracking & Telemetry** es una lista de URLs relacionadas con telemetría y seguimiento para Linux.
 
+## GIT CLONE
+
+---
+
+```bash
+sudo apt install -y git subversion
+svn export "https://github.com/maravento/vault/trunk/telemetry"
+```
+
 ## IMPORTANT
 
 ---

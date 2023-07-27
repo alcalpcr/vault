@@ -11,7 +11,8 @@
 ---
 
 ```bash
-git clone --depth=1 https://gilab.com/maravento/blackString.git
+sudo apt install -y git subversion
+svn export "https://github.com/maravento/vault/trunk/blackstring"
 ```
 
 ## DEPENDENCIES

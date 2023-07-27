@@ -4,6 +4,15 @@
 
 **uniOPOS** es un paquete de instalación preconfigurado de uniCenta OPOS para Puntos de Ventas (POS/ERP Open Source)
 
+## GIT CLONE
+
+---
+
+```bash
+sudo apt install -y git subversion
+svn export "https://github.com/maravento/vault/trunk/uniopos"
+```
+
 ## UNIOPOS FOR WINDOWS
 
 ---
@@ -443,26 +452,12 @@ Once you start uniCenta oPOS Beta v5.0.1, in the library you must replace the li
 - [Oracle Java SE 1.8.0_212 (PPA: Hellenic Schools Technical Support Team)](https://launchpad.net/~ts.sch.gr/+archive/ubuntu/ppa)
 - [Relative shortcuts for Windows](https://www.csparks.com/Relative/index.html)
 - [Resource Turner](http://www.restuner.com/)
-- [trek](https://github.com/maravento/vault/tree/master/trek)
 - [uniCenta oPOS](https://unicenta.com/download-files/installers/)
 - [Uniform Zero (UZero)](https://sourceforge.net/projects/miniserver/files/)
 - [Vault](https://github.com/maravento/vault)
 - [vcredist](https://github.com/abbodi1406/vcredist/releases)
 - [WampServer](https://wampserver.aviatechno.net/?lang=en)
 - [Webmin (Optional)](https://www.webmin.com/)
-- [WinZenity](https://github.com/maravento/winzenity)
-
-## CONTRIBUTIONS
-
----
-
-We thank all those who have contributed to this project / Agradecemos a todos aquellos que han contribuido a este proyecto
-
-## DONATE
-
----
-
-BTC: 3M84UKpz8AwwPADiYGQjT9spPKCvbqm4Bc
 
 ## LICENCES
 

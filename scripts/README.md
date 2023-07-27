@@ -4,6 +4,15 @@
 
 Script collection for windows and linux / Colección de script para windows y linux
 
+## GIT CLONE
+
+---
+
+```bash
+sudo apt install -y git subversion
+svn export "https://github.com/maravento/vault/trunk/scripts"
+```
+
 ## HOW TO USE
 
 ---
@@ -54,15 +63,19 @@ Tested on: / probado en: Windows 7/10/11 x64 (run with privileges)
 
 - Force reset proxy and network interfaces
 
-  [netreset](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/netreset.bat)
+  [netreset.bat](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/netreset.bat)
 
 - Run PC in mode: safe with network/safe minimal/normal
 
-  [safemode](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/safemode.bat)
+  [safemode.bat](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/safemode.bat)
 
 - Activate or Deactivate SMB1 protocol
 
-  [smb1](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/smb1.bat)
+  [smb1.bat](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/smb1.bat)
+
+- [Activate or Deactivate SMB signing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing)
+
+  [smbsign.bat](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/smbsign.bat)
 
 ## LICENCES
 
