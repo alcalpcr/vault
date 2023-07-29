@@ -207,7 +207,7 @@ Si aparece como "Disco Extraíble", Windows lo detectó correctamente y el selec
 - [SteelWerX](https://fstaal01.home.xs4all.nl/swreg-us.html)
 - [TCC Jpsoft](https://jpsoft.com/products/tcc-cmd-prompt.html)
 - [unzip mkssoftware](https://www.mkssoftware.com/docs/man1/unzip.1.asp)
-- [WinZenity](https://github.com/maravento/winzenity)
+- [WinZenity](https://github.com/maravento/vault/tree/master/winzenity)
 
 ## LICENCES
 

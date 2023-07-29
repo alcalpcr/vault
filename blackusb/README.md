@@ -123,7 +123,7 @@ Tool to block unauthorized devices USB, HID, HDC, Bluetooth, IEEE, SmartCardRead
 - [Robust File Copy](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy)
 - [robvanderwoude](http://www.robvanderwoude.com/)
 - [USBOblivion](https://sourceforge.net/projects/usboblivion/)
-- [WinZenity](https://github.com/maravento/winzenity)
+- [WinZenity](https://github.com/maravento/vault/tree/master/winzenity)
 
 ## LICENCES
 

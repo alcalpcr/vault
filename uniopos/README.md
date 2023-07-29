@@ -23,7 +23,7 @@ svn export "https://github.com/maravento/vault/trunk/uniopos"
 
 |File (mega)|File (pcloud)|OS|Size|
 | :---: | :---: | :---: |  :---: |
-| [uniOPOS.exe (.zip)](https://mega.nz/file/zA1F3YCC#b8iQEAxwfhkxuZA4lvF4N6z7xfCgCH0xdEMOI_WpgOQ) | [uniOPOS.exe (.zip)](https://u.pcloud.link/publink/show?code=0iP7) | Windows 7/8/10/11 x64 | 1.57 GB |
+| [uniOPOS.exe (.zip)](https://mega.nz/file/aENQiQzL#-aXeaGXMdl0IZ3EfCR5V4-sKxpHyBJC15Dl90TNxRtE) | [uniOPOS.exe (.zip)](https://u.pcloud.link/publink/show?code=0iP7) | Windows 7/8/10/11 x64 | 1.59 GB |
 
 ### How to Use
 
@@ -238,7 +238,7 @@ Go to the destination folder `%HOMEDRIVE%\PortableSrv\` and find the shortcuts t
 
 - [uniCenta oPOS WebServer v4.6.4 (.zip)](https://sourceforge.net/projects/unicentaopos/)
 - [HeidiSQL v12.5 x64 Portable.zip (.exe)](https://www.heidisql.com/download.php)
-- [MySQL Server v5.7.42 x64 (no-install package .zip)](https://dev.mysql.com/downloads/mysql/5.7.html#downloads/)
+- [MySQL Server v5.7.43 x64 (no-install package .zip)](https://dev.mysql.com/downloads/mysql/5.7.html#downloads/)
 
 #### Desktop Launcher
 
@@ -454,10 +454,10 @@ Once you start uniCenta oPOS Beta v5.0.1, in the library you must replace the li
 - [Resource Turner](http://www.restuner.com/)
 - [uniCenta oPOS](https://unicenta.com/download-files/installers/)
 - [Uniform Zero (UZero)](https://sourceforge.net/projects/miniserver/files/)
-- [Vault](https://github.com/maravento/vault)
 - [vcredist](https://github.com/abbodi1406/vcredist/releases)
 - [WampServer](https://wampserver.aviatechno.net/?lang=en)
 - [Webmin (Optional)](https://www.webmin.com/)
+- [WinZenity](https://github.com/maravento/vault/tree/master/winzenity)
 
 ## LICENCES
 

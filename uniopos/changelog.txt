@@ -1,5 +1,8 @@
 ﻿## uniOPOS CHANGELOG
 
+2023.07.28
+Update: mysql-5.7.43-winx64 (no-install package .zip) (WebServer Pack)
+
 2023.07.19
 Update: Visual C++ 2022 Redistributable - v14.36.32532.0 (Global)
 New: uniCenta-oPos-5.0-Migration-Guide.pdf
