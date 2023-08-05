@@ -426,7 +426,9 @@ function essential_setup(){
     # compression
     nala install -y tzdata tar p7zip p7zip-full p7zip-rar rar unrar unzip zip unace cabextract arj zlib1g-dev
     # system tools
-    nala install -y gawk gir1.2-gtop-2.0 gir1.2-xapp-1.0 javascript-common libjs-jquery libxapp1 rake ruby ruby-did-you-mean ruby-json ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit rubygems-integration xapps-common python3-pip libssl-dev libffi-dev python3-dev python3-venv idle3 python3-psutil gtkhash moreutils renameutils libpam0g-dev dh-autoreconf rename wmctrl dos2unix i2c-tools bind9-dnsutils geoip-database neofetch ppa-purge gdebi synaptic pm-utils sharutils wget dpkg pv libnotify-bin inotify-tools expect tcl-expect tree preload xsltproc debconf-utils mokutil uuid-dev libmnl-dev conntrack mesa-utils gcc make autoconf autoconf-archive autogen automake pkg-config deborphan perl lsof finger logrotate linux-firmware util-linux linux-tools-common build-essential module-assistant linux-headers-$(uname -r)
+    nala install -y gawk gir1.2-gtop-2.0 gir1.2-xapp-1.0 javascript-common libjs-jquery libxapp1 rake ruby ruby-did-you-mean ruby-json ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit rubygems-integration xapps-common python3-pip libssl-dev libffi-dev python3-dev python3-venv idle3 python3-psutil gtkhash moreutils renameutils libpam0g-dev dh-autoreconf rename wmctrl dos2unix i2c-tools bind9-dnsutils geoip-database neofetch ppa-purge gdebi synaptic pm-utils sharutils wget dpkg pv libnotify-bin inotify-tools expect tcl-expect tree preload xsltproc debconf-utils mokutil uuid-dev libmnl-dev conntrack gcc make autoconf autoconf-archive autogen automake pkg-config deborphan perl lsof finger logrotate linux-firmware util-linux linux-tools-common build-essential module-assistant linux-headers-$(uname -r)
+    # mesa (if there any problems, install the package libegl-mesa0)
+    nala install -y mesa-utils
     # file tools
     nala install -y reiserfsprogs reiser4progs xfsprogs jfsutils dosfstools e2fsprogs hfsprogs hfsutils hfsplus mtools nilfs-tools f2fs-tools quota sshfs lvm2 attr jmtpfs
 }
@@ -452,8 +454,11 @@ function gateproxy_setup(){
     nala install -y php
     # apache2 (http server)
     nala install -y apache2 apache2-doc apache2-utils apache2-dev apache2-suexec-pristine libaprutil1 libaprutil1-dev
-    apt -qq install -y --reinstall apache2-doc
     systemctl enable apache2.service
+    # To fix apache2 error: Syntax error on line 146 of /etc/apache2/apache2.conf | Cannot load /usr/lib/apache2/modules/mod_dnssd.so
+    #nala install -y libapache2-mod-dnssd
+    # To fix apache2-doc error:
+    apt -qq install -y --reinstall apache2-doc
     fixbroken
     cp -f /etc/apache2/ports.conf{,.bak} &> /dev/null
     sed -i '/^Listen.*/a Listen 8000\nListen 10100\nListen 10200\nListen 10300' /etc/apache2/ports.conf

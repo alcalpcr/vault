@@ -21,6 +21,12 @@ svn export "https://github.com/maravento/vault/trunk/scripts"
 
 Tested on: / probado en: Ubuntu 20.04/22.04 x64
 
+- Disk Temp (HDD/SSD/NVMe)
+
+  ```bash
+  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/disktemp.sh && sudo chmod +x disktemp.sh && sudo ./disktemp.sh
+  ```
+
 - FreeFileSync Update
 
   ```bash
@@ -43,6 +49,12 @@ Tested on: / probado en: Ubuntu 20.04/22.04 x64
 
   ```bash
   wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/pskill.sh && sudo chmod +x pskill.sh && sudo ./pskill.sh
+  ```
+
+- TRIM (SSD/NVMe)
+
+  ```bash
+  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/trim.sh && sudo chmod +x trim.sh && sudo ./trim.sh
   ```
 
 - VirtualBox install | remove
