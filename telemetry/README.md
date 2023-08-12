@@ -1,6 +1,6 @@
 # [Tracking & Telemetry](https://www.maravento.com)
 
-[![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/vault/tree/master/telemetry)
+[![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/vault)
 
 **Tracking & Telemetry** is a list of URLs related to Telemetry & Tracking for Linux
 

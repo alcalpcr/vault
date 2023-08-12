@@ -1,6 +1,6 @@
 # [Sqstat](https://www.maravento.com)
 
-[![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault/tree/master/sqstat)
+[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://github.com/maravento/vault)
 
 **SqStat** is a script that allows you to verify the active connections of users. Use the cachemgr protocol to obtain information about the [Squid Proxy Server](https://www.squid-cache.org/).
 

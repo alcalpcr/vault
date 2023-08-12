@@ -1,6 +1,6 @@
 # [Scripts](https://www.maravento.com)
 
-[![status-beta](https://img.shields.io/badge/status-beta-magenta.svg)](https://github.com/maravento/vault/tree/master/scripts)
+[![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/vault)
 
 Script collection for windows and linux / Colección de script para windows y linux
 
@@ -37,6 +37,12 @@ Tested on: / probado en: Ubuntu 20.04/22.04 x64
 
   ```bash
   wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/ipkill.sh && sudo chmod +x ipkill.sh && sudo ./ipkill.sh
+  ```
+
+- phpvirtualbox install
+
+  ```bash
+  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/phpvbox.sh && sudo chmod +x phpvbox.sh && sudo ./phpvbox.sh
   ```
 
 - Port Kill (check port with: `sudo netstat -lnp | grep "port"`)

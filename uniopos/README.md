@@ -17,7 +17,7 @@ svn export "https://github.com/maravento/vault/trunk/uniopos"
 
 ---
 
-[![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault/tree/master/uniopos)
+[![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault)
 
 ### Data Sheet
 

@@ -1,6 +1,6 @@
 # [Stack](https://www.maravento.com)
 
-[![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault/tree/master/stack)
+[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://github.com/maravento/vault)
 
 **Stack** contains stack installation package for linux / **Stack** contiene paquete de instalación stack para Linux
 

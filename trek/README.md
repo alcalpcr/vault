@@ -1,6 +1,6 @@
 # [Trek](https://www.maravento.com)
 
-[![status-beta](https://img.shields.io/badge/status-beta-magenta.svg)](https://github.com/maravento/vault/tree/master/trek)
+[![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault)
 
 **Trek** is an experimental SQL database rescue tool. It is used when there is damage to the software, which prevents exporting by traditional methods.
 

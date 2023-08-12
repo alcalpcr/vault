@@ -26,6 +26,6 @@ f "$PS"
 
 if [  $? -gt 0 ]; then
    echo "There are no records of: $PS"
- else
+else
    echo "Done"
 fi

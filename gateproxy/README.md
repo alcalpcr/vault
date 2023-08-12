@@ -1,6 +1,6 @@
 # [Gateproxy](https://www.maravento.com)
 
-[![status-beta](https://img.shields.io/badge/status-beta-magenta.svg)](https://github.com/maravento/vault/tree/master/gateproxy)
+[![status-beta](https://img.shields.io/badge/status-beta-magenta.svg)](https://github.com/maravento/vault)
 
 **Gateproxy** is a simple proxy/firewall server for managing Pyme's [LAN](https://en.wikipedia.org/wiki/Local_area_network) networks. The installation and configuration script is fully automated and customizable according to the needs of the administrator or organization, with minimal interaction during the process. It can be implemented in physical servers or VMs, for greater flexibility and portability.
 

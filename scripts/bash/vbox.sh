@@ -1,7 +1,7 @@
 #!/bin/bash
 # by maravento.com
 
-# Vbox install | remove
+# Virtualbox install | remove
 
 # checking root
 if [ "$(id -u)" != "0" ]; then
@@ -48,7 +48,7 @@ function vboxinstall(){
 
 function vboxpurge(){
     echo "Vbox has been detected. Removing..."
- vboxmanage list runningvms | sed -r 's/.*\{(.*)\}/\1/' | xargs -L1 -I {} VBoxManage controlvm {} savestate
+    vboxmanage list runningvms | sed -r 's/.*\{(.*)\}/\1/' | xargs -L1 -I {} VBoxManage controlvm {} savestate
     ps ax | grep -P 'vboxwebbsrv|VirtualBox|Vbox' | awk '{print $1}' | xargs kill -9 &> /dev/null
     systemctl stop vboxweb-service.service &> /dev/null
     service vboxdrv stop &> /dev/null
@@ -66,6 +66,6 @@ if [ "$vboxversion" ]; then
     vboxpurge
     sleep 5
     vboxinstall
- else
+else
     vboxinstall
 fi

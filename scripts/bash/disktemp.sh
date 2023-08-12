@@ -44,7 +44,7 @@ the_ppa=malcscott/ppa... # e.g. the_ppa="foo/bar2"
 if ! grep -q "^deb .*$the_ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
     add-apt-repository -y ppa:malcscott/ppa
     apt-get -qq install -y hddtemp
- else
+else
     echo OK
 fi
 

@@ -7,10 +7,10 @@
 
 **Vault** es una colección de proyectos multiplataforma, propios y de terceros, en los siguientes ciclos:
 
-[![status-beta](https://img.shields.io/badge/status-beta-magenta.svg)](https://github.com/maravento/vault/tree/master/gateproxy)
-[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://lightsquid.sourceforge.net/)
-[![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/vault/tree/master/blackstring)
-[![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault/tree/master/bandwidthd)
+[![status-beta](https://img.shields.io/badge/status-beta-magenta.svg)](https://github.com/maravento/vault)
+[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://github.com/maravento/vault)
+[![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/vault)
+[![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault)
 
 ## GIT CLONE
 
@@ -19,6 +19,15 @@
 ```bash
 git clone --depth=1 https://github.com/maravento/vault.git
 ```
+
+To download a specific project, run (replace `project` with the name of the project): / Para descargar un proyecto específico, ejecute (reemplace `project` por el nombre del proyecto):
+
+```
+sudo apt install -y git subversion
+svn export "https://github.com/maravento/vault/trunk/project"
+```
+
+Or simply click on the links to the projects described below: / O simplemente pulse en los enlaces a los proyectos que se describen a continuación:
 
 ## DATA SHEET
 

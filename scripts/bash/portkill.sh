@@ -25,6 +25,6 @@ read -p "Enter Port Number to close: " port
 kill $(lsof -t -i:"$port") &> /dev/null
 if [  $? -gt 0 ]; then
    echo "There are no records of $port"
- else
+else
    echo "Done"
 fi

@@ -1,6 +1,6 @@
 # WinZenity (Zenity Portable for Windows)
 
-[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://github.com/maravento/winzenity)
+[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://github.com/maravento/vault)
 
 [**WinZenity** (Zen Dialogs for Windows)](https://en.wikipedia.org/wiki/Zenity) is a software that allows generating simple dialogues as a wrapper and designed as a substitute for gdialog for GNOME and console dialog. It uses the GTK + and GLADE libraries. This version was ported to run on Windows Systems
 

@@ -1,6 +1,6 @@
 # [Dextroyer](https://www.maravento.com/p/dxt.html)
 
-[![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/dextroyer)
+[![status-experimental](https://img.shields.io/badge/status-experimental-orange.svg)](https://github.com/maravento/vault)
 
 Dextroyer (dxt) is an experimental package of security scripts for Windows. Contains highly destructive tools, classified as malware by some antivirus and security solutions ([VirusTotal report](https://www.virustotal.com/en/file/63c60e798a5738e10cb6fda1975c360d9889b4c437c2c04bd20ec967926c9b7e/analysis/1551278322/)), and can harm your system if used incorrectly. Therefore, use it at your own risk.
 

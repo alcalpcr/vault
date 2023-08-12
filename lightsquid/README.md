@@ -1,6 +1,6 @@
 # [Lightsquid](https://www.maravento.com)
 
-[![status-frozen](https://img.shields.io/badge/status-frozen-blue.svg)](https://github.com/maravento/vault/tree/master/lightsquid)
+[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://github.com/maravento/vault)
 
 **Lightsquid** is a webapp that works exclusively with [Squid-Cache](https://www.squid-cache.org/), extracting from `access.log` the necessary data to show the traffic statistics of the local network.
 
