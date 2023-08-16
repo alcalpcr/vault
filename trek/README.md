@@ -136,7 +136,7 @@ MySQL (Community Server): \Program Files\MySQL\MySQL(version)
 - [stahlworks ZipUnzip](http://stahlworks.com/dev/index.php?tool=zipunzip)
 - [WinZenity](https://github.com/maravento/vault/tree/master/winzenity)
 
-## LICENCES
+## LICENSES
 
 ---
 

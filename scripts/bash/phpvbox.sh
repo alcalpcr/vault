@@ -8,6 +8,9 @@
 # special thanks to:
 # https://github.com/BartekSz95
 
+echo "phpVirtualBox Start. Wait..."
+printf "\n"
+
 # checking root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
@@ -25,11 +28,11 @@ if pidof -x $(basename $0) > /dev/null; then
 fi
 
 # checking dependencies
-pkg='bsdutils unzip apache2 libapache2-mod-php php php-soap php-xml'
-if apt-get -qq install $pkg; then
+pkgs='bsdutils unzip apache2 libapache2-mod-php php php-soap php-xml'
+if apt-get install -qq $pkgs; then
     echo "OK"
 else
-    echo "Error installing $pkg. Abort"
+    echo "Error installing $pkgs. Abort"
     exit
 fi
 

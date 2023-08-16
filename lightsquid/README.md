@@ -1,6 +1,6 @@
 # [Lightsquid](https://www.maravento.com)
 
-[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://github.com/maravento/vault)
+[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://lightsquid.sourceforge.net/)
 
 **Lightsquid** is a webapp that works exclusively with [Squid-Cache](https://www.squid-cache.org/), extracting from `access.log` the necessary data to show the traffic statistics of the local network.
 
@@ -18,8 +18,6 @@ svn export "https://github.com/maravento/vault/trunk/lightsquid"
 ## DATA SHEET
 
 ---
-
-[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://lightsquid.sourceforge.net/)
 
 | Developer | Fork | Theme | HowTo |
 | :---: | :---: | :---: | :---: |
@@ -178,7 +176,13 @@ LightSquid can generate reports in PDF, CSV, etc., but it will only show the TOP
 find /var/www/lightsquid/report -type f -name '[0-9]*.[0-9]*.[0-9]*.[0-9]*' -exec grep -oE '[[:alnum:]_.-]+\.([[:alnum:]_.-]+)+' {} \; | sed 's/^\.//' | sed -r 's/^(www|ftp|ftps|ftpes|sftp|pop|pop3|smtp|imap|http|https)\.//g' | sed -r '/^[0-9]{1,3}(\.[0-9]{1,3}){3}$/d' | tr -d ' ' | awk '{print "." $1}' | sort -u > sites.txt
 ```
 
-## LICENCES
+## EOL
+
+---
+
+This project has reached EOL (End of Life). No longer supported or updated / Este proyecto a alcanzado EOL (End of Life). Ya no cuenta con soporte o actualizaciones
+
+## LICENSES
 
 ---
 

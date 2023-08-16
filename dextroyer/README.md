@@ -209,7 +209,7 @@ Si aparece como "Disco Extraíble", Windows lo detectó correctamente y el selec
 - [unzip mkssoftware](https://www.mkssoftware.com/docs/man1/unzip.1.asp)
 - [WinZenity](https://github.com/maravento/vault/tree/master/winzenity)
 
-## LICENCES
+## LICENSES
 
 ---
 

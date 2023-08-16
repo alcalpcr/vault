@@ -125,7 +125,7 @@ Tool to block unauthorized devices USB, HID, HDC, Bluetooth, IEEE, SmartCardRead
 - [USBOblivion](https://sourceforge.net/projects/usboblivion/)
 - [WinZenity](https://github.com/maravento/vault/tree/master/winzenity)
 
-## LICENCES
+## LICENSES
 
 ---
 

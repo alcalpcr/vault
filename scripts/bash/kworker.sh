@@ -1,13 +1,17 @@
 #!/bin/bash
 # by maravento.com
 
-# Kill Kworker
+# Kworker Kill
+
+echo "Kworker Kill. Wait..."
+printf "\n"
 
 # checking root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
     exit 1
 fi
+
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
   for p in $(pidof -x $(basename $0)); do
@@ -18,8 +22,6 @@ if pidof -x $(basename $0) > /dev/null; then
   done
 fi
 
-echo "Start Kill Kworker..."
-echo -e
 kworker=$(pwd)/gpelist.txt
 echo "Check GPE list..."
 # Generates GPE list
@@ -32,5 +34,5 @@ if [ ! "$gpe" ]; then
  else
    echo "Send Deactivation Signal"
    echo "disable" > "$gpe"
-   bash -c 'echo "kworker disable $(cat $gpe)"' | tee /var/log/syslog
+   bash -c 'echo "kworker disable $(cat $gpe)"' | tee -a /var/log/syslog
 fi

@@ -3,6 +3,9 @@
 
 # FreeFileSync Update
 
+echo "FreeFileSync Update Start. Wait..."
+printf "\n"
+
 # checking root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
@@ -18,14 +21,12 @@ if pidof -x $(basename $0) > /dev/null; then
   done
 fi
 
-echo "Starting FreeFileSync Update..."
-
-# checking dependencies (optional)
-pkg='expect tcl-expect libnotify-bin'
-if apt-get -qq install $pkg; then
+# checking dependencies
+pkgs='expect tcl-expect libnotify-bin'
+if apt-get install -qq $pkgs; then
     echo "OK"
 else
-    echo "Error installing $pkg. Abort"
+    echo "Error installing $pkgs. Abort"
     exit
 fi
 

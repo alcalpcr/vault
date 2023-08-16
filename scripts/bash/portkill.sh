@@ -4,11 +4,15 @@
 # Port Kill
 # check port with: sudo netstat -lnp | grep "port"
 
+echo "Port Kill Start. Wait..."
+printf "\n"
+
 # checking root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
     exit 1
 fi
+
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
   for p in $(pidof -x $(basename $0)); do
@@ -19,8 +23,6 @@ if pidof -x $(basename $0) > /dev/null; then
   done
 fi
 
-echo "Start Port Kill..."
-echo -e
 read -p "Enter Port Number to close: " port
 kill $(lsof -t -i:"$port") &> /dev/null
 if [  $? -gt 0 ]; then

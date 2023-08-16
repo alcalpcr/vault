@@ -49,14 +49,13 @@ svn export "https://github.com/maravento/vault/trunk/winzenity"
 - https://wiki.gnome.org/action/show/Projects/Zenity
 - http://www.placella.com/software/zenity/
 
-
-## IMPORTANT
+## EOL
 
 ---
 
 This project has reached EOL (End of Life). No longer supported or updated / Este proyecto a alcanzado EOL (End of Life). Ya no cuenta con soporte o actualizaciones
 
-## LICENCES
+## LICENSES
 
 ---
 

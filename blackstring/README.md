@@ -234,7 +234,7 @@ sudo crontab -l | { cat; echo "*/10 * * * * /path_to_script/banip.sh"; } | sudo 
 - [tcpdump-cheat-sheet](https://cdn.comparitech.com/wp-content/uploads/2019/06/tcpdump-cheat-sheet.jpg)
 - [wireshark](https://www.wireshark.org/)
 
-## LICENCES
+## LICENSES
 
 ---
 

@@ -90,7 +90,13 @@ sudo rm -rf /usr/local/ampps/
 - [AMPPS v3.8 x64 (Softaculous)](http://www.ampps.com/downloads)
 - [LAMP v7.1.33-0 x64 (Bitnami)](https://bitnami.com/stack/lamp)
 
-## LICENCES
+## EOL
+
+---
+
+This project has reached EOL (End of Life). No longer supported or updated / Este proyecto a alcanzado EOL (End of Life). Ya no cuenta con soporte o actualizaciones
+
+## LICENSES
 
 ---
 

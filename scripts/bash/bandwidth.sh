@@ -4,11 +4,15 @@
 # Check Bandwidth
 # Source: https://github.com/sivel/speedtest-cli
 
+echo "Check Bandwidth. Wait..."
+printf "\n"
+
 # checking root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
     exit 1
 fi
+
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
   for p in $(pidof -x $(basename $0)); do
@@ -19,9 +23,12 @@ if pidof -x $(basename $0) > /dev/null; then
   done
 fi
 
-echo Check Bandwidth. Wait...
+# Check Bandwidth
+# Set Minimum Download Value
 dlmin="1.00"
+# Set Minimum Upload Value
 ulmin="1.00"
+
 dl=$(curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 - --simple --no-upload | grep 'Download:')
 ul=$(curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 - --simple --no-download | grep 'Upload:')
 resume=$(curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 - --simple)
@@ -38,6 +45,7 @@ if (( $(echo "$dlvalue $dlmin" | awk '{print ($1 < $2)}') )); then
          echo "Bandwidth Download OK" "Up to $dlmin"
 fi
 }
+
 function upload(){
 if (( $(echo "$ulvalue $ulmin" | awk '{print ($1 < $2)}') )); then
          echo "WARNING! Bandwidth Upload Slow: $ulvalue $ulmb < $ulmin $mb (min value)"

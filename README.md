@@ -16,18 +16,21 @@
 
 ---
 
+**To download all repositories: / Para descargar todos los repositorios:**
+
 ```bash
 git clone --depth=1 https://github.com/maravento/vault.git
 ```
 
-To download a specific project, run (replace `project` with the name of the project): / Para descargar un proyecto específico, ejecute (reemplace `project` por el nombre del proyecto):
+**To download a specific repository: / Para descargar un repositorio específico:**
 
-```
-sudo apt install -y git subversion
-svn export "https://github.com/maravento/vault/trunk/project"
-```
+- For linux (Ubuntu/Debian)(Replace "project" with the name of repository): `sudo apt install git subversion && svn export "https://github.com/maravento/vault/trunk/project"`
 
-Or simply click on the links to the projects described below: / O simplemente pulse en los enlaces a los proyectos que se describen a continuación:
+- For Windows (10/11): with [git](https://git-scm.com/download/win) and [Apache Subversion (SVN)](https://subversion.apache.org/). You can use [with TortoiseSVN](https://tortoisesvn.net/), [smartSVN](https://www.smartsvn.com/), etc.
+
+- With [DownGit Project](https://github.com/MinhasKamal/DownGit/blob/master/README.md#how-to-use).
+
+- Or click on the link of the project of your choice, which are described in [DATA SHEET](https://github.com/maravento/vault#data-sheet). / O clic en el enlace del proyecto de su preferencia, que se describen en [DATA SHEET](https://github.com/maravento/vault#data-sheet).
 
 ## DATA SHEET
 
@@ -68,7 +71,7 @@ We thank all those who contributed to this project. Special thanks to: / Agradec
 
 BTC: 3M84UKpz8AwwPADiYGQjT9spPKCvbqm4Bc
 
-## LICENCES
+## LICENSES
 
 ---
 

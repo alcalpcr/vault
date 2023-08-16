@@ -3,11 +3,15 @@
 
 # IP Kill
 
+echo "IP Kill. Wait..."
+printf "\n"
+
 # checking root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
     exit 1
 fi
+
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
   for p in $(pidof -x $(basename $0)); do
@@ -20,8 +24,6 @@ fi
 
 sleep_time="10"
 
-echo "Start IP Kill..."
-echo -e
 echo "Net Interfaces:"
 ip -o link | awk '$2 != "lo:" {print $2, $(NF-2)}' | sed 's_: _ _'
 read -p "Enter the network interface. e.g: enpXsX): " eth

@@ -41,7 +41,7 @@ wget -q -N https://raw.githubusercontent.com/maravento/vault/master/gateproxy/ga
 
 Gateproxy is an experimental script and may contain bugs, which will be documented or fixed where possible and contain some programs for testing purposes. Therefore, it is not recommended for use in networks or high productivity environments. / Gateproxy es un script experimental y puede contener fallos, los cuales serán documentados o corregidos en lo posible y contener algunos programas para propósitos de pruebas. Por tanto, no se recomienda su uso en redes o entornos de alta productividad.
 
-## LICENCES
+## LICENSES
 
 ---
 

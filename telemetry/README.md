@@ -90,7 +90,7 @@ sed "s:^\.\(.*\):127.0.0.0 \1:g" telemetry.txt > telemetry_hosts.txt
 - [firebog.net/hosts/Easyprivacy](https://v.firebog.net/hosts/Easyprivacy.txt)
 - [firebog.net/hosts/Prigent-Ads](https://v.firebog.net/hosts/Prigent-Ads.txt)
 
-## LICENCES
+## LICENSES
 
 ---
 

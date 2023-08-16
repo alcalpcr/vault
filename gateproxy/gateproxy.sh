@@ -59,8 +59,6 @@ aclroute=/etc/acl
 if [ ! -d $aclroute ]; then mkdir -p $aclroute; fi &> /dev/null
 scr=/etc/scr
 if [ ! -d $scr ]; then mkdir -p $scr; fi &> /dev/null
-add=$scr/add
-if [ ! -d $add ]; then mkdir -p $add; fi &> /dev/null
 
 # LOCAL USER (sudo user no root)
 local_user=${SUDO_USER:-$(whoami)}

@@ -4,11 +4,15 @@
 # Check temp HDD, SSD, NVME and send alert to desktop and syslog
 # Note: Not compatible with some storages hdd | ssd
 
+echo "Check Disk Temp Start. Wait..."
+printf "\n"
+
 # checking root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
     exit 1
 fi
+
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
   for p in $(pidof -x $(basename $0)); do
@@ -20,11 +24,11 @@ if pidof -x $(basename $0) > /dev/null; then
 fi
 
 # checking dependencies (optional)
-pkg='notify-osd libnotify-bin inxi'
-if apt-get -qq install $pkg; then
+pkgs='notify-osd libnotify-bin inxi'
+if apt-get install -qq $pkgs; then
     echo "OK"
 else
-    echo "Error installing $pkg. Abort"
+    echo "Error installing $pkgs. Abort"
     exit
 fi
 
@@ -39,11 +43,11 @@ inxi -xD | awk "/temp/ {if (\$2>$degrees) print \"ALERT: hard drive temperature 
 
 # Alternative (if inxi command fails)
 
-# checking dependencies (optional)
+# checking dependencies
 the_ppa=malcscott/ppa... # e.g. the_ppa="foo/bar2"
 if ! grep -q "^deb .*$the_ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-    add-apt-repository -y ppa:malcscott/ppa
-    apt-get -qq install -y hddtemp
+    add-apt-repository -y ppa:malcscott/ppa > /dev/null 2>&1
+    apt-get install -qq hddtemp
 else
     echo OK
 fi

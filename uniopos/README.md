@@ -459,7 +459,7 @@ Once you start uniCenta oPOS Beta v5.0.1, in the library you must replace the li
 - [Webmin (Optional)](https://www.webmin.com/)
 - [WinZenity](https://github.com/maravento/vault/tree/master/winzenity)
 
-## LICENCES
+## LICENSES
 
 ---
 

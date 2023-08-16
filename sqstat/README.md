@@ -1,6 +1,6 @@
 # [Sqstat](https://www.maravento.com)
 
-[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://github.com/maravento/vault)
+[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://lightsquid.sourceforge.net/)
 
 **SqStat** is a script that allows you to verify the active connections of users. Use the cachemgr protocol to obtain information about the [Squid Proxy Server](https://www.squid-cache.org/).
 
@@ -18,8 +18,6 @@ svn export "https://github.com/maravento/vault/trunk/sqstat"
 ## DATA SHEET
 
 ---
-
-[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://lightsquid.sourceforge.net/)
 
 | Developer | Last Version | HowTo |
 | :---: | :---: | :---: |
@@ -86,7 +84,13 @@ sudo systemctl restart squid
 sudo systemctl restart apache2
 ```
 
-## LICENCES
+## EOL
+
+---
+
+This project has reached EOL (End of Life). No longer supported or updated / Este proyecto a alcanzado EOL (End of Life). Ya no cuenta con soporte o actualizaciones
+
+## LICENSES
 
 ---
 

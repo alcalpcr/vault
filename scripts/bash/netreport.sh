@@ -1,13 +1,17 @@
 #!/bin/bash
 # by maravento.com
 
-# Check LocalNet Alive
+# Net Report
+
+echo "Net Report Start. Wait..."
+printf "\n"
 
 # checking root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
     exit 1
 fi
+
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
   for p in $(pidof -x $(basename $0)); do
@@ -18,24 +22,23 @@ if pidof -x $(basename $0) > /dev/null; then
   done
 fi
 
-myuser="your_user"
-
 # check dependencies
-pkg='nmap xsltproc arp-scan'
-if apt-get -qq install $pkg; then
+pkgs='nmap xsltproc arp-scan'
+if apt-get install -qq $pkgs; then
     echo "OK"
  else
-    echo "Error installing $pkg. Abort"
+    echo "Error installing $pkgs. Abort"
     exit
 fi
 
-echo "Start Nmap Scan Local Network..."
+# LOCAL USER
+local_user=${SUDO_USER:-$(whoami)}
 
 # Option 1: Intensive | Deep
 nmap -v -sSUV --version-light -r -T4 -Pn -O -F --script smb-os-discovery.nse 192.168.0.0/24 -oX netreport.xml
 xsltproc netreport.xml -o netreport.html
-chown $myuser:$myuser netreport.html
-sudo -u $myuser bash -c 'firefox netreport.html' &
+chown $local_user:$local_user netreport.html
+sudo -u $local_user bash -c 'firefox netreport.html' &
 
 # Option 2: Intensive | Deep
 #wget https://raw.githubusercontent.com/honze-net/nmap-bootstrap-xsl/master/nmap-bootstrap.xsl

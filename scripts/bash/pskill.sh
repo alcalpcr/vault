@@ -3,11 +3,15 @@
 
 # Kill Process By Name
 
+echo "Kill Process Start. Wait..."
+printf "\n"
+
 # checking root
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
     exit 1
 fi
+
 # checking script execution
 if pidof -x $(basename $0) > /dev/null; then
   for p in $(pidof -x $(basename $0)); do
@@ -18,8 +22,6 @@ if pidof -x $(basename $0) > /dev/null; then
   done
 fi
 
-echo "Start Kill Prosess By Name..."
-echo -e
 read -p "Set process name (e.g. vlc): " PS
 f() { ps ax | grep "$1" | grep -v grep | awk '{print $1}' | xargs kill -9 &> /dev/null; }
 f "$PS"

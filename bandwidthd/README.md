@@ -1,6 +1,6 @@
 # [BandwidthD](https://www.maravento.com)
 
-[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://github.com/maravento/vault)
+[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://bandwidthd.sourceforge.net/)
 
 **BandwidthD** tracks usage of TCP/IP network subnets and builds html files with graphs to display utilization. Charts are built by individual IPs, and by default display utilization over 2 day, 8 day, 40 day, and 400 day periods. Furthermore, each ip address's utilization can be logged out at intervals of 3.3 minutes, 10 minutes, 1 hour or 12 hours in cdf format, or to a backend database server. HTTP, TCP, UDP, ICMP, VPN, and P2P traffic are color coded.
 
@@ -18,8 +18,6 @@ svn export "https://github.com/maravento/vault/trunk/bandwidthd"
 ## DATA SHEET
 
 ---
-
-[![status-deprecated](https://img.shields.io/badge/status-deprecated-red.svg)](https://bandwidthd.sourceforge.net/)
 
 | Developers | Last Version | HowTo |
 | :---: | :---: | :---: |
@@ -143,7 +141,7 @@ This section is to block users who have overcome the consumption of data default
 sudo /etc/init.d/bwbandata.sh
 ```
 
-**crontab (every 15 min)**
+**crontab (every 15 min):**
 
 ```bash
 */15 * * * * /etc/init.d/bwbandata.sh
@@ -183,7 +181,13 @@ max_bandwidth="1G"
 
 The nomenclature to use can be in GBytes instead of Bytes, which is more comfortable for the sysadmin, for example 0.5G or 512M or 536870912. By default, we select 1 Gigabyte (GB) of data = 1073741824 byte (B). / La nomenclatura a usar puede ser en GBytes en lugar de Bytes, lo cual es más cómodo para el sysadmin, por ejemplo 0.5G o 512M o 536870912. Por defecto, seleccionamos 1 Gigabyte (GB) de datos = 1073741824 byte (B).
 
-## LICENCES
+## EOL
+
+---
+
+This project has reached EOL (End of Life). No longer supported or updated / Este proyecto a alcanzado EOL (End of Life). Ya no cuenta con soporte o actualizaciones
+
+## LICENSES
 
 ---
 

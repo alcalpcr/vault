@@ -17,85 +17,49 @@ svn export "https://github.com/maravento/vault/trunk/scripts"
 
 ---
 
-### Bash (Linux)
+### BASH (Linux)
 
 Tested on: / probado en: Ubuntu 20.04/22.04 x64
 
-- Disk Temp (HDD/SSD/NVMe)
+#### Drive
 
-  ```bash
-  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/disktemp.sh && sudo chmod +x disktemp.sh && sudo ./disktemp.sh
-  ```
+- [Drive Crypt (Cryptomator Encrypted Disk - Mount | Umount - Folder /home/$USER/DriveCrypt)](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/drivecrypt.sh)
+- [Gdrive Mount | Umount (folder /home/$USER/Gdrive)](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/gdrive.sh)
 
-- FreeFileSync Update
+#### Net
 
-  ```bash
-  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/ffsupdate.sh && sudo chmod +x ffsupdate.sh && sudo ./ffsupdate.sh
-  ```
+- [Check Bandwidth](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/bandwidth.sh)
+- [IP Kill](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/ipkill.sh)
+- [Net Report](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/netreport.sh)
+- [Port Kill (check port with: `sudo netstat -lnp | grep "port"`)](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/portkill.sh)
 
-- IP Kill
+#### SysTools
 
-  ```bash
-  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/ipkill.sh && sudo chmod +x ipkill.sh && sudo ./ipkill.sh
-  ```
+- [ARP table filter](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/arponscan.sh)
+- [Check Cron](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/checkcron.sh)
+- [Disk Temp (HDD/SSD/NVMe)](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/disktemp.sh)
+- [FreeFileSync Update](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/ffsupdate.sh)
+- [Kill Process By Name](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/pskill.sh)
+- [Kworker Kill](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/kworker.sh)
+- [TRIM (SSD/NVMe)](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/trim.sh)
 
-- phpvirtualbox install
+#### Virtual
 
-  ```bash
-  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/phpvbox.sh && sudo chmod +x phpvbox.sh && sudo ./phpvbox.sh
-  ```
+- [phpVirtualBox install](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/phpvbox.sh)
+- [Virtual Hard Disk (VHD) image (.img) with loop or kpartx - Create and Mount | Umount](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/vdisk.sh)
+- [VirtualBox Install | Remove](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/vboxinstall.sh)
+- [VMs Virtualbox {start|stop|shutdown|reset|status} (replace `my_vm` with the name of your vm)](https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/vm.sh)
 
-- Port Kill (check port with: `sudo netstat -lnp | grep "port"`)
-
-  ```bash
-  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/portkill.sh && sudo chmod +x portkill.sh && sudo ./portkill.sh
-  ```
-
-- Kill Process By Name
-
-  ```bash
-  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/pskill.sh && sudo chmod +x pskill.sh && sudo ./pskill.sh
-  ```
-
-- TRIM (SSD/NVMe)
-
-  ```bash
-  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/trim.sh && sudo chmod +x trim.sh && sudo ./trim.sh
-  ```
-
-- VirtualBox install | remove
-
-  ```bash
-  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/vbox.sh && sudo chmod +x vbox.sh && sudo ./vbox.sh
-  ```
-
-- VMs Virtualbox {start|stop|shutdown|reset|status} (replace `my_vm` with the name of your vm)
-
-  ```bash
-  wget -q -N https://raw.githubusercontent.com/maravento/vault/master/scripts/bash/vm.sh && sudo chmod +x vm.sh && sudo ./vm.sh start
-  ```
-
-### Batch (Windows)
+### BATCH (Windows)
 
 Tested on: / probado en: Windows 7/10/11 x64 (run with privileges)
 
-- Force reset proxy and network interfaces
+- [Activate or Deactivate SMB signing](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/smbsign.bat)
+- [Activate or Deactivate SMB1 protocol](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/smb1.bat)
+- [Force reset proxy and network interfaces](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/netreset.bat)
+- [Run PC in mode: safe with network/safe minimal/normal](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/safemode.bat)
 
-  [netreset.bat](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/netreset.bat)
-
-- Run PC in mode: safe with network/safe minimal/normal
-
-  [safemode.bat](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/safemode.bat)
-
-- Activate or Deactivate SMB1 protocol
-
-  [smb1.bat](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/smb1.bat)
-
-- [Activate or Deactivate SMB signing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing)
-
-  [smbsign.bat](https://raw.githubusercontent.com/maravento/vault/master/scripts/batch/smbsign.bat)
-
-## LICENCES
+## LICENSES
 
 ---
 
