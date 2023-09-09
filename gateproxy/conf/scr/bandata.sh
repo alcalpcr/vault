@@ -18,13 +18,13 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 ### GLOBAL
@@ -59,21 +59,20 @@ daily_logs=$report/$(date +"%Y%m%d")
 today=$(date +"%u")
 # bandata daily rule
 echo "Running Bandata Daily..."
-if [[ "$today" -eq 6 || "$today" -eq 7 ]]
-then
-  echo "Weekend Excluded"
-  cat /dev/null > $block_list_daily
+if [[ "$today" -eq 6 || "$today" -eq 7 ]]; then
+    echo "Weekend Excluded"
+    cat /dev/null >$block_list_daily
 else
-  echo "Not Weekend"
-    ( cd $daily_logs
-        for file in 192.168*
-        do
-            if (( $(awk <$file '/^total/ {print($2)}') > $max_bw )); then
+    echo "Not Weekend"
+    (
+        cd $daily_logs
+        for file in 192.168*; do
+            if (($(awk <$file '/^total/ {print($2)}') > $max_bw)); then
                 echo $file
             fi
         done
     ) >banout
-    cat banout | grep -wvf $allow_list > $block_list_daily
+    cat banout | grep -wvf $allow_list >$block_list_daily
 fi
 echo "OK"
 
@@ -85,8 +84,8 @@ max_bw=$(echo $max_bandwidth_month | tr '.' ',' | numfmt --from=iec)
 month_logs=$report/$(date +"%Y%m"*)
 weekend_logs=$(
     for x in $(seq 0 9); do
-        date -d "$x sun 5 week ago" +'%b %Y%m%d';
-        date -d "$x sat 5 week ago" +'%b %Y%m%d';
+        date -d "$x sun 5 week ago" +'%b %Y%m%d'
+        date -d "$x sat 5 week ago" +'%b %Y%m%d'
     done | grep $(date +%b) | awk '{print $2}'
 )
 folders=$(find $month_logs -type f | grep -vf <(echo "$weekend_logs"))
@@ -94,16 +93,16 @@ totals=$(echo "$folders" | xargs -I {} awk '/^total:/{sub(".*/", "", FILENAME); 
 ips=$(echo "$totals" | awk '{ arr[$1]+=$2 } END { for (key in arr) printf("%s\t%s\n", arr[key], key) }' | sort -k1,1)
 # bandata monthly rule
 echo "Running Bandata Monthly..."
-echo "$ips" | awk '$1 > '$max_bw' {print $2}' | grep -wvf $allow_list > $block_list_month
+echo "$ips" | awk '$1 > '$max_bw' {print $2}' | grep -wvf $allow_list >$block_list_month
 echo "OK"
 
 ### IPSET/IPTABLES FOR BANDATA
 echo "Running Ipset/Iptables Rules..."
 $ipset -L bandata >/dev/null 2>&1
 if [ $? -ne 0 ]; then
-        $ipset -! create bandata hash:net family inet hashsize 1024 maxelem 65536
-    else
-        $ipset -! flush bandata
+    $ipset -! create bandata hash:net family inet hashsize 1024 maxelem 65536
+else
+    $ipset -! flush bandata
 fi
 for ip in $(cat $block_list_daily $block_list_month | $reorganize | uniq); do
     $ipset -! add bandata "$ip"

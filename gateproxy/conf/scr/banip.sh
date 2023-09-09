@@ -9,13 +9,13 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 ### GLOBAL
@@ -50,14 +50,14 @@ bantime="86400"
 localrange="192.168.*"
 # add matches to ban_ip
 # change option path (for local: grep -f "$ban_words") (for curl: grep -F "$ban_words")
-perl -MDate::Parse -ne "print if/^(.{15})\s/&&str2time(\$1)>time-$bantime" "$syslogemu" | grep -f "$ban_words" | grep -Pio 'src=[^\s]+' | grep -Po "$localrange" > "$ban_ip"
+perl -MDate::Parse -ne "print if/^(.{15})\s/&&str2time(\$1)>time-$bantime" "$syslogemu" | grep -f "$ban_words" | grep -Pio 'src=[^\s]+' | grep -Po "$localrange" >"$ban_ip"
 
 ### IPSET/IPTABLES FOR BANIP
 $ipset -L banip >/dev/null 2>&1
 if [ $? -ne 0 ]; then
-        $ipset -! create banip hash:net family inet hashsize 1024 maxelem 65536
-    else
-        $ipset -! flush banip
+    $ipset -! create banip hash:net family inet hashsize 1024 maxelem 65536
+else
+    $ipset -! flush banip
 fi
 for ip in $(cat $ban_ip | $reorganize | uniq); do
     $ipset -! add banip "$ip"

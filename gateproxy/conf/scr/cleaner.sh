@@ -67,23 +67,23 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 echo "Start Deep Cleaner..."
 
 # Buscar y eliminar archivos ADS (Thumbs.db, Zone.identifier, encryptable, etc)
 #find . -type f -name "Nombre_del_Archivo" -exec rm {} \;
-find . -type f -regextype posix-egrep -iregex "^.*(:encryptable|Zone\.identifier|.fuse_hidden*|goutputstream*|.spotlight-*|.fseventsd*|.ds_store*|~lock.*|Thumbs\.db|attributes:).*$" -exec rm {} \; &> /dev/null
+find . -type f -regextype posix-egrep -iregex "^.*(:encryptable|Zone\.identifier|.fuse_hidden*|goutputstream*|.spotlight-*|.fseventsd*|.ds_store*|~lock.*|Thumbs\.db|attributes:).*$" -exec rm {} \; &>/dev/null
 
 # Eliminar reportes antiguos de apport
-rm -rf /var/crash/*crash &> /dev/null
+rm -rf /var/crash/*crash &>/dev/null
 
 # eliminar llenado kern/syslog
 #cat /dev/null > /var/log/kern.log

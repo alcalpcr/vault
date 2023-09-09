@@ -1,15 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # by maravento.com
 
 # BandwidthD install
 
 # checking root
 if [ "$(id -u)" != "0" ]; then
-    echo "This script must be run as root" 1>&2
-    exit 1
+  echo "This script must be run as root" 1>&2
+  exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
+if pidof -x $(basename $0) >/dev/null; then
   for p in $(pidof -x $(basename $0)); do
     if [ "$p" -ne $$ ]; then
       echo "Script $0 is already running..."
@@ -21,10 +21,10 @@ fi
 # check dependencies
 pkg='wget git tar apache2 ipset subversion libnotify-bin libcgi-session-perl libgd-gd2-perl'
 if apt-get -qq install $pkg; then
-    echo "OK"
- else
-    echo "Error installing $pkg. Abort"
-    exit
+  echo "OK"
+else
+  echo "Error installing $pkg. Abort"
+  exit
 fi
 
 echo "BandwidthD install..."
@@ -34,12 +34,12 @@ svn export "https://github.com/maravento/vault/trunk/bandwidthd" >/dev/null 2>&1
 cd bandwidthd
 
 # install
-apt -y purge bandwidthd* &> /dev/null
-rm -rf /usr/sbin/bandwidthd /etc/bandwidthd /var/lib/bandwidthd /etc/init.d/bandwidthd /var/run/bandwidthd* &> /dev/null
-if [ ! -d /etc/bandwidthd ]; then mkdir -p /etc/bandwidthd; fi &> /dev/null
+apt -y purge bandwidthd* &>/dev/null
+rm -rf /usr/sbin/bandwidthd /etc/bandwidthd /var/lib/bandwidthd /etc/init.d/bandwidthd /var/run/bandwidthd* &>/dev/null
+if [ ! -d /etc/bandwidthd ]; then mkdir -p /etc/bandwidthd; fi &>/dev/null
 cp -f bandwidthd.conf /etc/bandwidthd/bandwidthd.conf
 DEBIAN_FRONTEND=noninteractive apt install -y bandwidthd
-cp -f /etc/bandwidthd/bandwidthd.conf{,.bak} &> /dev/null
+cp -f /etc/bandwidthd/bandwidthd.conf{,.bak} &>/dev/null
 
 # localnet
 echo
@@ -66,9 +66,18 @@ cp -f bw_bandata.sh /etc/init.d/bwbandata.sh
 chmod +x /etc/init.d/bwbandata.sh
 
 # cron
-crontab -l | { cat; echo '0 0 * * * /bin/kill -HUP $(cat /var/run/bandwidthd.pid) && sleep 5 && /etc/init.d/bandwidthd restart'; } | crontab -
-crontab -l | { cat; echo '#@daily find "/var/lib/bandwidthd" -type f -name "log.1.*.cdf" -not -name "log.1.0.cdf" -delete && /etc/init.d/bandwidthd restart'; } | crontab -
-crontab -l | { cat; echo '*/15 * * * * /etc/init.d/bwbandata.sh'; } | crontab -
+crontab -l | {
+  cat
+  echo '0 0 * * * /bin/kill -HUP $(cat /var/run/bandwidthd.pid) && sleep 5 && /etc/init.d/bandwidthd restart'
+} | crontab -
+crontab -l | {
+  cat
+  echo '#@daily find "/var/lib/bandwidthd" -type f -name "log.1.*.cdf" -not -name "log.1.0.cdf" -delete && /etc/init.d/bandwidthd restart'
+} | crontab -
+crontab -l | {
+  cat
+  echo '*/15 * * * * /etc/init.d/bwbandata.sh'
+} | crontab -
 
 # End
 echo "Bandwidthd Access: http://localhost/bandwidthd or http://localhost:41000/bandwidthd"

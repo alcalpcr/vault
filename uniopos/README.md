@@ -23,7 +23,7 @@ svn export "https://github.com/maravento/vault/trunk/uniopos"
 
 |File (mega)|File (pcloud)|OS|Size|
 | :---: | :---: | :---: |  :---: |
-| [uniOPOS.exe (.zip)](https://mega.nz/file/aENQiQzL#-aXeaGXMdl0IZ3EfCR5V4-sKxpHyBJC15Dl90TNxRtE) | [uniOPOS.exe (.zip)](https://u.pcloud.link/publink/show?code=0iP7) | Windows 7/8/10/11 x64 | 1.59 GB |
+| [uniOPOS.exe (.zip)](https://mega.nz/file/SN9EAADB#UORwztCYRXOtcChKFgK6Nk2cEIlKM4apZndshoazdf8) | [uniOPOS.exe (.zip)](https://u.pcloud.link/publink/show?code=0iP7) | Windows 7/8/10/11 x64 | 1.59 GB |
 
 ### How to Use
 
@@ -54,21 +54,20 @@ At the end of the installation of each package the following message will appear
 
 - According to the [Minimum Requirements](https://unicenta.com/pages/install-unicenta-opos/), uniCenta oPOS depends on Java. Therefore, uniOPOS includes: / De acuerdo a los [Requisitos Mínimos](https://unicenta.com/pages/install-unicenta-opos/), uniCenta oPOS depende de Java. Por tanto, uniOPOS incluye:
 
-  `Oracle Java 8 Update 371 x86 x64`
+  `Oracle Java 8 Update 381 x86 x64`
 
 - According to the developers, [uniCenta oPOS v4x only uses MySQL Server and v5.7.x is recommended](https://unicenta.com/pages/configure-unicenta-opos/). / Según los desarrolladores, [uniCenta oPOS v4x solamente utiliza MySQL Server y v5.7.x es la recomendada](https://unicenta.com/pages/configure-unicenta-opos/).
 - According to the [official MySQL channel](https://dev.mysql.com/doc/refman/5.7/en/windows-installation.html), MySQL Community v5.7 Server requires Microsoft Visual C++ 2019 Redistributable Package to run on Windows platforms (This requirement changed over time: MySQL 5.7.37 and earlier require Microsoft Visual C++ 2013 Redistributable Package, MySQL 5.7.38 and 5.7.39 require both, and only the Microsoft Visual C++ 2019 Redistributable Package is required as of MySQL 5.7.40). Therefore, uniOPOS includes: / Según el [canal oficial de MySQL](https://dev.mysql.com/doc/refman/5.7/en/windows-installation.html), MySQL Community v5.7 Server requiere Microsoft Visual C++ 2019 Redistributable Package para ejecutarse en plataformas Windows (Este requisito cambió con el tiempo: MySQL 5.7.37 y anteriores requieren Microsoft Visual C++ 2013 Redistributable Package, MySQL 5.7.38 y 5.7.39 requieren ambos, y solo se requiere el paquete redistribuible de Microsoft Visual C++ 2019 a partir de MySQL 5.7.40). Por tanto, uniOPOS incluye:
 
   ```shell
-    Visual C++ 2005 Redistributable x86 x64 (8.0.50727.6229)
-    Visual C++ 2008 Redistributable x86 x64 (9.30729.7523)
-    Visual C++ 2010 Redistributable x86 x64 (10.0.40219.473)
-    Visual C++ 2012 Additional and Minimum Runtime x86 x64 (11.0.61135.400)
-    Visual C++ 2013 Additional and Minimum Runtime x86 x64 (12.0.40664.0)
-    Visual C++ 2019 Additional and Minimum Runtime x86 x64 (14.29.30130.2)
-    Visual C++ 2022 Additional and Minimum Runtime x86 x64 (14.36.32532.0)
-    Visual Legacy Runtimes x86: Basic/C++ 2002 (7.0.9975.0) - 2003 (7.10.6119.0)
-    Visual Studio 2010 Tools for Office Runtime x86 x64 (10.0.60833.0)
+  Microsoft Visual Basic/C++ Runtime x86 - 1.1.0
+  Microsoft Visual C++ 2005 Redistributable x86 x64 - 8.0.61187
+  Microsoft Visual C++ 2008 Redistributable x86 x64 - 9.30729.7523
+  Microsoft Visual C++ 2010 Redistributable x86 x64 - 10.0.40219
+  Microsoft Visual C++ 2012 Redistributable x86 x64 (Additional and Minimum Runtime) - 11.0.61135
+  Microsoft Visual C++ 2013 Redistributable x86 x64 (Additional and Minimum Runtime) - 12.0.40664
+  Microsoft Visual C++ 2022 Redistributable x86 x64 (Additional and Minimum Runtime) - 14.38.32919
+  Microsoft Visual Studio 2010 Tools for Office Runtime x64 - 10.0.60910.0 (MSI 10.0.60915)
   ```
 
 <div align="center">
@@ -79,11 +78,12 @@ At the end of the installation of each package the following message will appear
 
 - If you have previous versions of uniOPOS (or some of its components: uniCenta oPOS (`unicentaopos.properties`), MySQL Server (DBs & config), etc.) installed on your system, it is highly recommended that you remove or stop the related services. uniOPOS can also remove previous versions of its components, so Backup before using it / Si tiene versiones previas de uniOPOS (o de algunos de sus componentes: uniCenta oPOS (`unicentaopos.properties`), MySQL Server (DBs & config), etc), instaladas en su sistema, se recomenda encarecidamente que las elimine o detenga los servicios relacionados. uniOPOS también puede eliminar versiones previas de sus componentes, por tanto haga Backup antes de usarlo
 
-#### About uniCenta oPOS
+#### About uniCenta oPOS Upgrade
 
-UniOPOS install version 4.6.4 of UniCenta oPOS. To update to version 5x, consult the document: / UniOPOS instala la versión 4.6.4 de uniCenta oPOS. Para actualizar a la versión 5x, consulte el documento:
+UniOPOS install uniCenta oPOS v4.6.4. To update to uniCenta oPOS v5x: / UniOPOS instala uniCenta oPOS v4.6.4. Para actualizar a uniCenta oPOS v5x:
 
-[uniCenta-oPos-5.0-Migration-Guide.pdf](https://raw.githubusercontent.com/maravento/vault/master/uniopos/resources/docs/uniCenta-oPos-5.0-Migration-Guide.pdf)
+- [uniCenta-oPos-5.0-Migration-Guide.pdf](https://raw.githubusercontent.com/maravento/vault/master/uniopos/resources/docs/uniCenta-oPos-5.0-Migration-Guide.pdf)
+- [uniCenta oPOS 5x Installers](https://mega.nz/folder/uZ8EhDII#Ts8UAJxO1zp0ZQEh9cvSrg)
 
 #### About DB
 

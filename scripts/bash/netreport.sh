@@ -13,20 +13,20 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # check dependencies
 pkgs='nmap xsltproc arp-scan'
 if apt-get install -qq $pkgs; then
     echo "OK"
- else
+else
     echo "Error installing $pkgs. Abort"
     exit
 fi

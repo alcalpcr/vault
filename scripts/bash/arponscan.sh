@@ -14,13 +14,13 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # checking dependencies
@@ -41,7 +41,7 @@ printf "\n"
 read -p "Enter the local IP server (e.g. 192.168.0.10): " localip
 
 # ip2mac
-function ip2mac(){
+function ip2mac() {
     # SARPI + ISC-DHCP-SERVER + arpon.conf
     # capture mac/ip from /var/lib/dhcp/dhcpd.leases (out format: ip  mac)
     #cat /var/lib/dhcp/dhcpd.leases | egrep -o 'lease.*{|ethernet.*;' | awk '{print $2}' | xargs -n 2 | cut -d ';' -f 1 > /etc/arpon.conf
@@ -64,48 +64,48 @@ function ip2mac(){
     # check script (with ip neigh)
     # capture mac+ip from mac* adresses files and add to arpstatic (string format mac*: a;mac;ip;HOST)
     # example mac files: $acl/macadmin $acl/macusers
-    echo '#!/bin/bash' > arpstatic
-    awk -F";" '{print "ip neigh replace " $3 " lladdr " $2 " nud permanent dev '$lan'"}' $acl/mac* | sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n -k 5,5n -k 6,6n -k 7,7n -k 8,8n -k 9,9n | uniq >> arpstatic
+    echo '#!/bin/bash' >arpstatic
+    awk -F";" '{print "ip neigh replace " $3 " lladdr " $2 " nud permanent dev '$lan'"}' $acl/mac* | sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n -k 5,5n -k 6,6n -k 7,7n -k 8,8n -k 9,9n | uniq >>arpstatic
 }
 
 # arpon run
 # change mode (darpi, sarpi, harpi)
 mode=darpi
 
-function arponrun(){
-if [[ `ps -ef | grep -w '[a]rpon'` != "" ]];then
-    # optional rule: flush ARP table
-    ip -s -s neigh flush all >/dev/null 2>&1
-    # optional rule: flush ARP table (PERM)
-    arp -a | grep -i perm | grep -oP '(\d+\.){3}\d+' | grep -v $localip | xargs -I {} arp -d {}
-    # run script and add ip+mac to ARP Table (DARPI + arpstatic)
-    chmod +x ./arpstatic && ./arpstatic >/dev/null 2>&1
-    # log
-    echo "ArpON ONLINE" | tee -a /var/log/syslog
-  else
-    # optional rule: flush ARP table
-    ip -s -s neigh flush all >/dev/null 2>&1
-    # optional rule: flush ARP table (PERM)
-    arp -a | grep -i perm | grep -oP '(\d+\.){3}\d+' | grep -v $localip | xargs -I {} arp -d {}
-    # run script and add ip+mac to ARP Table (DARPI + arpstatic)
-    chmod +x ./arpstatic && ./arpstatic >/dev/null 2>&1
-    # start ArpON
-    /usr/sbin/arpon -d -i $lan --$mode > /dev/null 2>&1
-    # log
-    echo "ArpON start $date" | tee -a /var/log/syslog
-fi
+function arponrun() {
+    if [[ $(ps -ef | grep -w '[a]rpon') != "" ]]; then
+        # optional rule: flush ARP table
+        ip -s -s neigh flush all >/dev/null 2>&1
+        # optional rule: flush ARP table (PERM)
+        arp -a | grep -i perm | grep -oP '(\d+\.){3}\d+' | grep -v $localip | xargs -I {} arp -d {}
+        # run script and add ip+mac to ARP Table (DARPI + arpstatic)
+        chmod +x ./arpstatic && ./arpstatic >/dev/null 2>&1
+        # log
+        echo "ArpON ONLINE" | tee -a /var/log/syslog
+    else
+        # optional rule: flush ARP table
+        ip -s -s neigh flush all >/dev/null 2>&1
+        # optional rule: flush ARP table (PERM)
+        arp -a | grep -i perm | grep -oP '(\d+\.){3}\d+' | grep -v $localip | xargs -I {} arp -d {}
+        # run script and add ip+mac to ARP Table (DARPI + arpstatic)
+        chmod +x ./arpstatic && ./arpstatic >/dev/null 2>&1
+        # start ArpON
+        /usr/sbin/arpon -d -i $lan --$mode >/dev/null 2>&1
+        # log
+        echo "ArpON start $date" | tee -a /var/log/syslog
+    fi
 }
 
 # Stops the service if there are duplicates / Detiene el servicio si hay duplicados
-function duplicate(){
-acl=$(for field in 2 3 4; do cut -d\; -f${field} "$acl"/mac-* | sort | uniq -d; done)
-if [ "${acl}" == "" ]; then
-    ip2mac
-    arponrun
-    echo Done
-  else
-    echo "Duplicate Data: $(date) $acl" | tee -a /var/log/syslog
-    exit
-fi
+function duplicate() {
+    acl=$(for field in 2 3 4; do cut -d\; -f${field} "$acl"/mac-* | sort | uniq -d; done)
+    if [ "${acl}" == "" ]; then
+        ip2mac
+        arponrun
+        echo Done
+    else
+        echo "Duplicate Data: $(date) $acl" | tee -a /var/log/syslog
+        exit
+    fi
 }
 duplicate

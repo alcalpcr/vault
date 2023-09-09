@@ -5,11 +5,11 @@
 
 # checking root
 if [ "$(id -u)" != "0" ]; then
-    echo "This script must be run as root" 1>&2
-    exit 1
+  echo "This script must be run as root" 1>&2
+  exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
+if pidof -x $(basename $0) >/dev/null; then
   for p in $(pidof -x $(basename $0)); do
     if [ "$p" -ne $$ ]; then
       echo "Script $0 is already running..."
@@ -21,10 +21,10 @@ fi
 # check dependencies
 pkg='wget git tar squid apache2 ipset subversion libnotify-bin nbtscan libcgi-session-perl libgd-gd2-perl'
 if apt-get -qq install $pkg; then
-    echo "OK"
- else
-    echo "Error installing $pkg. Abort"
-    exit
+  echo "OK"
+else
+  echo "Error installing $pkg. Abort"
+  exit
 fi
 
 echo "Lightsquid install..."
@@ -43,7 +43,13 @@ a2enconf lightsquid
 systemctl restart apache2.service
 cp -f bandata.sh /etc/init.d/bandata.sh
 chmod +x /etc/init.d/bandata.sh
-crontab -l | { cat; echo "*/10 * * * * /var/www/lightsquid/lightparser.pl today"; } | crontab -
-crontab -l | { cat; echo "*/12 * * * * /etc/init.d/bandata.sh"; } | crontab -
+crontab -l | {
+  cat
+  echo "*/10 * * * * /var/www/lightsquid/lightparser.pl today"
+} | crontab -
+crontab -l | {
+  cat
+  echo "*/12 * * * * /etc/init.d/bandata.sh"
+} | crontab -
 echo done
 notify-send "LightSquid Done" "$(date)" -i checkbox

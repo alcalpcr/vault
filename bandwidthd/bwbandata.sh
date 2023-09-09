@@ -14,13 +14,13 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 ### GLOBAL
@@ -37,7 +37,7 @@ lan=eth1
 # path to ACLs folder
 aclroute=/etc/acl
 # Create folder if doesn't exist
-if [ ! -d $aclroute ]; then mkdir -p $aclroute; fi &> /dev/null
+if [ ! -d $aclroute ]; then mkdir -p $aclroute; fi &>/dev/null
 # path to ACLs
 allow_list=$aclroute/bwallowdata.txt
 block_list=$aclroute/bwbandata.txt
@@ -52,14 +52,14 @@ html_file=/var/lib/bandwidthd/htdocs/index.html
 # capture
 ips=$(grep -Pi '\<tr\.*' $html_file | sed -r 's:<[^>]+>: :g' | grep 192.168.1 | awk '{gsub(/\./, ",", $2); print $2" "$1}')
 max_bw=$(echo $max_bandwidth | tr '.' ',' | numfmt --from=iec)
-echo "$ips" | numfmt --from=iec | awk '$1 > '$max_bw' {print $2}' | grep -wvf $allow_list > $block_list
+echo "$ips" | numfmt --from=iec | awk '$1 > '$max_bw' {print $2}' | grep -wvf $allow_list >$block_list
 
 ### IPSET/IPTABLES FOR BANDATA
 $ipset -L bwbandata >/dev/null 2>&1
 if [ $? -ne 0 ]; then
-        $ipset -! create bwbandata hash:net family inet hashsize 1024 maxelem 65536
-    else
-        $ipset -! flush bwbandata
+    $ipset -! create bwbandata hash:net family inet hashsize 1024 maxelem 65536
+else
+    $ipset -! flush bwbandata
 fi
 for ip in $(cat $block_list | $reorganize | uniq); do
     $ipset -! add bwbandata "$ip"

@@ -9,13 +9,13 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # Verify: iptables -L -n / iptables -nvL / iptables -Ln -t mangle / iptables -Ln -t nat
@@ -74,53 +74,53 @@ $iptables -t mangle -Z
 
 ### IPv4 RULES ###
 # syncookies
-echo 1 > /proc/sys/net/ipv4/tcp_syncookies
+echo 1 >/proc/sys/net/ipv4/tcp_syncookies
 # Disables IP source routing
-echo 0 > /proc/sys/net/ipv4/conf/all/send_redirects # default 1
-echo 0 > /proc/sys/net/ipv4/conf/default/send_redirects # default 1
+echo 0 >/proc/sys/net/ipv4/conf/all/send_redirects     # default 1
+echo 0 >/proc/sys/net/ipv4/conf/default/send_redirects # default 1
 #echo 0 > /proc/sys/net/ipv4/conf/default/accept_source_aclroute # default 1
 # Enable Log Spoofed Packets, Source aclrouted Packets, Redirect Packets
-echo 1 > /proc/sys/net/ipv4/conf/all/log_martians # default 0
-echo 1 > /proc/sys/net/ipv4/conf/default/log_martians # default 0
+echo 1 >/proc/sys/net/ipv4/conf/all/log_martians     # default 0
+echo 1 >/proc/sys/net/ipv4/conf/default/log_martians # default 0
 # Helps against MITM attacks (If you have problems with your lan, change to 1)
-echo 0 > /proc/sys/net/ipv4/conf/all/secure_redirects # default 1
-echo 0 > /proc/sys/net/ipv4/conf/default/secure_redirects # default 1
+echo 0 >/proc/sys/net/ipv4/conf/all/secure_redirects     # default 1
+echo 0 >/proc/sys/net/ipv4/conf/default/secure_redirects # default 1
 # Don't proxy arp for anyone
-echo 1 > /proc/sys/net/ipv4/conf/all/arp_filter # default 0
+echo 1 >/proc/sys/net/ipv4/conf/all/arp_filter # default 0
 # Increase the networking port range
-echo 1024 65535 > /proc/sys/net/ipv4/ip_local_port_range # default 32768 60999
+echo 1024 65535 >/proc/sys/net/ipv4/ip_local_port_range # default 32768 60999
 # Enable a fix for RFC1337 - time-wait assassination hazards in TCP
-echo 1 > /proc/sys/net/ipv4/tcp_rfc1337 # default 0
+echo 1 >/proc/sys/net/ipv4/tcp_rfc1337 # default 0
 # Block SYN attacks
-echo 20000 > /proc/sys/net/ipv4/tcp_max_syn_backlog # default 1024
-echo 1 > /proc/sys/net/ipv4/tcp_synack_retries # default 5
-echo 5 > /proc/sys/net/ipv4/tcp_syn_retries # default 6
+echo 20000 >/proc/sys/net/ipv4/tcp_max_syn_backlog # default 1024
+echo 1 >/proc/sys/net/ipv4/tcp_synack_retries      # default 5
+echo 5 >/proc/sys/net/ipv4/tcp_syn_retries         # default 6
 # Disable IPv4 ICMP Redirect Acceptance
-echo 0 > /proc/sys/net/ipv4/conf/all/accept_redirects # default 1
-echo 0 > /proc/sys/net/ipv4/conf/default/accept_redirects # default 1
+echo 0 >/proc/sys/net/ipv4/conf/all/accept_redirects     # default 1
+echo 0 >/proc/sys/net/ipv4/conf/default/accept_redirects # default 1
 # Ignore all incoming ICMP echo requests
-echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all # default 0
+echo 1 >/proc/sys/net/ipv4/icmp_echo_ignore_all # default 0
 # Disables packet forwarding (NAT)
-echo 1 > /proc/sys/net/ipv4/ip_forward # default 0
+echo 1 >/proc/sys/net/ipv4/ip_forward # default 0
 # length of time an orphaned (unreferenced) connection will wait before it is aborted
-echo 30 > /proc/sys/net/ipv4/tcp_fin_timeout # default 60
+echo 30 >/proc/sys/net/ipv4/tcp_fin_timeout # default 60
 # frequency of TCP keepalive probes sent before deciding that a connection is broken
-echo 5 > /proc/sys/net/ipv4/tcp_keepalive_probes # default 9
+echo 5 >/proc/sys/net/ipv4/tcp_keepalive_probes # default 9
 # determines how often TCP keepalive packets are sent to keep a connection alive
-echo 15 > /proc/sys/net/ipv4/tcp_keepalive_intvl # default 75
+echo 15 >/proc/sys/net/ipv4/tcp_keepalive_intvl # default 75
 # specify the maximum number of packets per processing queue
-echo 20000 > /proc/sys/net/core/netdev_max_backlog # default 1000
+echo 20000 >/proc/sys/net/core/netdev_max_backlog # default 1000
 # pmtu
-echo 1 > /proc/sys/net/ipv4/ip_no_pmtu_disc # default 0
+echo 1 >/proc/sys/net/ipv4/ip_no_pmtu_disc # default 0
 # pmtu (alternative)
 #$iptables -t mangle -A POSTROUTING -p tcp --tcp-flags SYN,RST SYN -o $internet -j TCPMSS --clamp-mss-to-pmtu
 
 ### IPv6 RULES ###
 # Important: If you set "echo 1" (disable IPv6), Squid it will display the message:
 # WARNING: BCP 177 violation. Detected non-functional IPv6 loopback
-echo 0 > /proc/sys/net/ipv6/conf/all/disable_ipv6 # default 0
-echo 0 > /proc/sys/net/ipv6/conf/default/disable_ipv6 # default 0
-echo 0 > /proc/sys/net/ipv6/conf/lo/disable_ipv6 # default 0
+echo 0 >/proc/sys/net/ipv6/conf/all/disable_ipv6     # default 0
+echo 0 >/proc/sys/net/ipv6/conf/default/disable_ipv6 # default 0
+echo 0 >/proc/sys/net/ipv6/conf/lo/disable_ipv6      # default 0
 
 echo "OK"
 
@@ -177,8 +177,8 @@ create_acl() {
         ips="$ips\n$ip"
         macs="$macs\n$mac"
     done
-    echo -e $ips > $path_ips
-    echo -e $macs > $path_macs
+    echo -e $ips >$path_ips
+    echo -e $macs >$path_macs
 }
 create_acl $mac2ip
 $iptables -w -t mangle -A PREROUTING -i $lan -j DROP
@@ -321,9 +321,9 @@ $iptables -w -A port-scanning -j DROP
 # Echo (7), CHARGEN (19), FTP (20, 21), SSH (22), TELNET (23), SMTP/SSMTP/IMAP/IMAPS/POP3/POP3S/POP3PASS (25,106,143,465,587,993,110,995), 6to4 (41,43,44,58,59,60,3544), FINGER (79), SSDP (2869,1900,5000), RDP-MS WBT Server - Windows Terminal Serve (3389), RFB-VNC (5900), TOR Ports (9001,9050,9150), Brave Tor (8008,8443,9001:9004,9090,9101:9103,9030,9031,9050,9132:9159), IBM HTTP Server administration default (TCP/UDP 8008), SqueezeCenter/Cherokee/Openfire (9090), IPP (631), DCOM TCP Port & RPC Endpoint Mapper & RDC/DCE [Endpoint Mapper] – Microsoft networks (135), WinRM TCP Ports HTTP/HTTPS (5985:5986), TFTP (69) Trojans (10080), IRC (6660-6669), Trojans/Metasploit (4444), SQL inyection/XSS (8088, 8888), bittorrent (6881-6889 58251-58252,58687,6969) others P2P (1337,2760,4662,4672), RFC 2131 DHCP BOOTP protocol (67,68), Cryptomining (3333,5555,6666,7777,8848,9999,14444,14433,45560), Lightweight Directory Access protocol (LDAP) (389,636,3268,3269,10389,10636), Kerberos (88), WINS (42,1512), SUN.RPC - rpcbind [Remote Procedure Calls] (111), Barkley r-services and r-commands [e.g., rlogin, rsh, rexec] (512-514), Microsoft SQL Server [ms-sql-s] (1433), Microsoft SQL Monitor [ms-sql-m] (1434), TFTP (69), SNMP (161), VoIP - H.323 (1719/UDP 1720/TCP), Microsoft Point-to-Point Tunneling Protocol PPTP - VPN (1723), SIP (5060, 5061), SANE network scanner (6566), RTSP Nat Slipstreaming (TCP 554,5060:5061,1719:1720)
 $ipset -L blockports >/dev/null 2>&1
 if [ $? -ne 0 ]; then
-        $ipset -! create blockports bitmap:port range 0-65535
-    else
-        $ipset -! flush blockports
+    $ipset -! create blockports bitmap:port range 0-65535
+else
+    $ipset -! flush blockports
 fi
 for blports in $(cat $aclroute/blockports.txt | sort -V -u); do
     $ipset -! add blockports $blports
@@ -344,21 +344,21 @@ $iptables -w -t mangle -A PREROUTING -m set --match-set blockports src,dst -j DR
 # ipset rules
 #$ipset -L blockzone >/dev/null 2>&1
 #if [ $? -ne 0 ]; then
-        #echo "set blockzone does not exist. create set..."
-        #$ipset -! create blockzone hash:net family inet hashsize 1024 maxelem 10000000
-    #else
-        #echo "set blockzone exist. flush set..."
-        #$ipset -! flush blockzone
+#echo "set blockzone does not exist. create set..."
+#$ipset -! create blockzone hash:net family inet hashsize 1024 maxelem 10000000
+#else
+#echo "set blockzone exist. flush set..."
+#$ipset -! flush blockzone
 #fi
 #$ipset -! save > /tmp/ipset_blockzone.txt
 # read file and sort (v8.32 or later)
 #cat $zone/{cn,ru}.zone $aclroute/blackip.txt | sort -V -u | while read line; do
-    # optional: if there are commented lines
-    #if [ "${line:0:1}" = "#" ]; then
-        #continue
-    #fi
-    # adding IPv4 addresses to the tmp list
-    #echo "add blockzone $line" >> /tmp/ipset_blockzone.txt
+# optional: if there are commented lines
+#if [ "${line:0:1}" = "#" ]; then
+#continue
+#fi
+# adding IPv4 addresses to the tmp list
+#echo "add blockzone $line" >> /tmp/ipset_blockzone.txt
 #done
 # adding the tmp list of IPv4 addresses to the ddosip set of ipset
 #$ipset -! restore < /tmp/ipset_blockzone.txt
@@ -394,7 +394,7 @@ done
 # MACLIMITED (Port 8000 to 3128 - Opcion 252 DHCP)
 # Important: Limited MAC addresses are blocked by the "by MAC" rule in Squid
 limited=$(awk -F";" '{print $2}' $aclroute/mac-limited.txt)
-echo -e "$limited" > $aclroute/squid_maclimited.txt
+echo -e "$limited" >$aclroute/squid_maclimited.txt
 for mac in $(echo -e "$limited"); do
     $iptables -w -A INPUT -p tcp -m multiport --dports 8000,3128 -m mac --mac-source $mac -j ACCEPT
     $iptables -w -A FORWARD -p tcp -m multiport --dports 8000,3128 -m mac --mac-source $mac -j ACCEPT

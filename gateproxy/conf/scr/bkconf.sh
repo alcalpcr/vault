@@ -9,13 +9,13 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # user account
@@ -27,14 +27,13 @@ zipbk="backup_$(date +%Y%m%d_%H%M).zip"
 pathbk="/etc/squid/* /etc/acl/* /etc/apache2/* /var/www/wpad/* /etc/hosts /etc/sarg/* /etc/scr/* /etc/fstab /etc/samba/* /etc/network/interfaces /etc/netplan/config.yaml /etc/apt/sources.list /var/spool/cron/crontabs/*"
 
 case "$1" in
-  'start')
+'start')
     echo "Start Backup Config Files..."
-    zip -r "$cloud"/"$zipbk" $pathbk > /dev/null
+    zip -r "$cloud"/"$zipbk" $pathbk >/dev/null
     echo "Backup Config: $(date)" | tee -a /var/log/syslog
- ;;
-  'stop')
- ;;
-  *)
+    ;;
+'stop') ;;
+*)
     echo "Usage: $0 { start | stop }"
- ;;
+    ;;
 esac

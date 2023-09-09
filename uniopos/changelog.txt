@@ -1,28 +1,32 @@
 ﻿## uniOPOS CHANGELOG
 
+2023.08.23
+Update: Oracle Java 8 Update 381 x86 x64 (Global)
+Update: Microsoft Visual Studio 2010 Tools for Office Runtime x64 - 10.0.60910.0 (MSI 10.0.60915) (Global)
+
 2023.07.28
 Update: mysql-5.7.43-winx64 (no-install package .zip) (WebServer Pack)
 
 2023.07.19
-Update: Visual C++ 2022 Redistributable - v14.36.32532.0 (Global)
+Update: Microsoft Visual C++ 2022 Redistributable - v14.36.32532.0 (Global)
 New: uniCenta-oPos-5.0-Migration-Guide.pdf
 Fixed: Bugs
 
 2023.05.12
-Update: Visual C++ 2022 Redistributable - v14.36.32531.0 (Global)
+Update: Microsoft Visual C++ 2022 Redistributable - v14.36.32531.0 (Global)
 Update: HeidiSQL_12.5_64_Portable.zip (WebServer Pack)
 
 2023.04.18
-Update: Visual C++ 2022 Redistributable - v14.36.32522.0 (Global)
+Update: Microsoft Visual C++ 2022 Redistributable - v14.36.32522.0 (Global)
 Update: Oracle Java 8 Update 371 x86 x64 (Global)
 Update: mysql-5.7.42-winx64 (no-install package .zip) (WebServer Pack)
 
 2023.03.12
-Update: Visual C++ 2022 Redistributable - v14.36.32420.0 (Global)
+Update: Microsoft Visual C++ 2022 Redistributable - v14.36.32420.0 (Global)
 Fixed: Changed 'my.ini' with parameter 'max_allowed_packet = 1024M' (Install and Portable Pack)
 
 2023.02.28
-Update: Visual C++ 2022 Redistributable - 14.36.32323.0 (Global)
+Update: Microsoft Visual C++ 2022 Redistributable - 14.36.32323.0 (Global)
 Update: HeidiSQL_12.4_64_Portable.zip (WebServer Pack)
 
 2023.02.06
@@ -44,19 +48,19 @@ Update: Wampserver 3 x64 update 3.2.9 (Install Pack)
 Fixed: Bugs
 
 2022.11.17
-Update: Visual C++ 2022 Redistributable - 14.34.31931.0 (Global)
+Update: Microsoft Visual C++ 2022 Redistributable - 14.34.31931.0 (Global)
 Update: HeidiSQL_12.2_64_Portable.zip (WebServer Pack)
 
 2022.10.19
 Update: Oracle Java 8.0.3510.10 x86 x64 (Global)
 
 2022.10.13
-Update: Visual C++ 2022 Redistributable - 14.34.31921.1 (Global)
+Update: Microsoft Visual C++ 2022 Redistributable - 14.34.31921.1 (Global)
 Update: mysql-5.7.40-winx64 (no-install package .zip) (WebServer Pack)
 
 2022.10.03
 Update: Uniform Server 15_0_0_ZeroXIV (UZero) (Portable Pack)
-Update: Visual C++ 2022 Redistributable - 14.34.31823.3 (Global)
+Update: Microsoft Visual C++ 2022 Redistributable - 14.34.31823.3 (Global)
 
 2022.08.27
 New: VisualCppRedist_AIO_x86_x64_61 (check README)

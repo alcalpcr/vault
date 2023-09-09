@@ -18,13 +18,13 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # checking dependencies
@@ -73,7 +73,7 @@ usermod -aG vboxusers $local_user
 
 # restart services
 service apache2 restart
-service vboxweb-service stop > /dev/null
+service vboxweb-service stop >/dev/null
 service vboxweb-service start
 
 # Creating the script
@@ -91,13 +91,16 @@ if pgrep -x vboxwebsrv > /dev/null; then
         echo "vboxweb failed to start"
         logger "vboxweb failed to start"
     fi
-fi' > /etc/init.d/phpvbox_port.sh
+fi' >/etc/init.d/phpvbox_port.sh
 
 # execution permissions
 chmod +x /etc/init.d/phpvbox_port.sh
 
 # Add the task to the crontab
-(crontab -l ; echo "*/30 * * * * /etc/init.d/phpvbox_port.sh") | crontab -
+(
+    crontab -l
+    echo "*/30 * * * * /etc/init.d/phpvbox_port.sh"
+) | crontab -
 service cron restart
 echo "Script and cron task added successfully."
 echo

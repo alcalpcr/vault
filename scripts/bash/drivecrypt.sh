@@ -14,13 +14,13 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # checking dependencies
@@ -34,7 +34,7 @@ fi
 
 the_ppa=sebastian-stenzel/cryptomator... # e.g. the_ppa="foo/bar2"
 if ! grep -q "^deb .*$the_ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-    add-apt-repository -y ppa:malcscott/ppa > /dev/null 2>&1
+    add-apt-repository -y ppa:malcscott/ppa >/dev/null 2>&1
     apt-get install -qq cryptomator
 else
     echo OK
@@ -51,22 +51,22 @@ if [ ! -d $dstpath ]; then mkdir -p $dstpath && chmod u+rwx,go-rwx -R $dstpath; 
 originpath="/home/$local_user/.local/share/Cryptomator/mnt"
 
 case "$1" in
-  'start')
+'start')
     # mount
     echo "Mounting DriveCrypt..."
     # create folder if doesn't exist
-    if [ ! -d "$dstpath" ]; then sudo -u $local_user mkdir -p $dstpath; fi > /dev/null
+    if [ ! -d "$dstpath" ]; then sudo -u $local_user mkdir -p $dstpath; fi >/dev/null
     # mount
     sudo -u $local_user bindfs -n $originpath $dstpath
     echo "DriveCrypt Mount: $(date)" | tee -a /var/log/syslog
- ;;
-  'stop')
+    ;;
+'stop')
     echo "Umounting DriveCrypt..."
     # umount
     sudo -u $local_user fusermount -u $dstpath
     echo "DriveCrypt Umount: $(date)" | tee -a /var/log/syslog
- ;;
-  *)
+    ;;
+*)
     echo "Usage: $0 { start | stop }"
- ;;
+    ;;
 esac

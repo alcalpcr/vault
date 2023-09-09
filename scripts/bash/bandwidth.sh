@@ -14,13 +14,13 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # Check Bandwidth
@@ -38,27 +38,27 @@ ulvalue=$(echo "$ul" | awk '{print $2}')
 dlmb=$(echo "$dl" | awk '{print $3}')
 ulmb=$(echo "$ul" | awk '{print $3}')
 
-function download(){
-if (( $(echo "$dlvalue $dlmin" | awk '{print ($1 < $2)}') )); then
-         echo "WARNING! Bandwidth Download Slow: $dlvalue $dlmb < $dlmin $mb (min value)"
+function download() {
+    if (($(echo "$dlvalue $dlmin" | awk '{print ($1 < $2)}'))); then
+        echo "WARNING! Bandwidth Download Slow: $dlvalue $dlmb < $dlmin $mb (min value)"
     else
-         echo "Bandwidth Download OK" "Up to $dlmin"
-fi
+        echo "Bandwidth Download OK" "Up to $dlmin"
+    fi
 }
 
-function upload(){
-if (( $(echo "$ulvalue $ulmin" | awk '{print ($1 < $2)}') )); then
-         echo "WARNING! Bandwidth Upload Slow: $ulvalue $ulmb < $ulmin $mb (min value)"
+function upload() {
+    if (($(echo "$ulvalue $ulmin" | awk '{print ($1 < $2)}'))); then
+        echo "WARNING! Bandwidth Upload Slow: $ulvalue $ulmb < $ulmin $mb (min value)"
     else
-         echo "Bandwidth Upload OK" "Up to $ulmin"
-fi
+        echo "Bandwidth Upload OK" "Up to $ulmin"
+    fi
 }
 
 if [[ "$mb" == "$dlmb" ]] && [[ "$mb" == "$ulmb" ]]; then
-         download
-         upload
-    else
-         echo "Incorrect Value. Abort: $resume"
-         exit
+    download
+    upload
+else
+    echo "Incorrect Value. Abort: $resume"
+    exit
 fi
 echo Done

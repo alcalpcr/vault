@@ -11,20 +11,20 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # check dependencies
 pkg='wget git tar apache2 squid subversion libnotify-bin php php-cli libapache2-mod-php'
 if apt-get -qq install $pkg; then
     echo "OK"
- else
+else
     echo "Error installing $pkg. Abort"
     exit
 fi

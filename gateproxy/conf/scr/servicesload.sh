@@ -9,29 +9,29 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 sleep_time="5"
 
 # Webmin service
-if [[ $(ps -A | grep miniserv.pl) != "" ]];then
+if [[ $(ps -A | grep miniserv.pl) != "" ]]; then
     echo -e "\nONLINE"
 else
     echo -e "\n"
-    for pid in $(ps -ef | grep "miniserv.pl" | awk '{print $2}'); do kill -9 $pid &> /dev/null; done
+    for pid in $(ps -ef | grep "miniserv.pl" | awk '{print $2}'); do kill -9 $pid &>/dev/null; done
     sleep ${sleep_time}
     systemctl start webmin.service
     echo "Webmin start: $(date)" | tee -a /var/log/syslog
 fi
 # DHCP service
-if [[ $(ps -A | grep dhcpd) != "" ]];then
+if [[ $(ps -A | grep dhcpd) != "" ]]; then
     echo -e "\nONLINE"
 else
     echo -e "\n"
@@ -39,31 +39,31 @@ else
     echo "DHCP start: $(date)" | tee -a /var/log/syslog
 fi
 # Apache2 service
-if [[ $(ps -A | grep apache2) != "" ]];then
+if [[ $(ps -A | grep apache2) != "" ]]; then
     echo -e "\nONLINE"
 else
     echo -e "\n"
-    for pid in $(ps -ef | grep "apache2" | awk '{print $2}'); do kill -9 $pid &> /dev/null; done
+    for pid in $(ps -ef | grep "apache2" | awk '{print $2}'); do kill -9 $pid &>/dev/null; done
     sleep ${sleep_time}
     systemctl start apache2.service
     echo "Apache2 start: $(date)" | tee -a /var/log/syslog
 fi
 # Squid Service
-if [[ $(ps -A | grep squid) != "" ]];then
+if [[ $(ps -A | grep squid) != "" ]]; then
     echo -e "\nONLINE"
 else
     echo -e "\n"
-    for pid in $(ps -ef | grep "squid" | awk '{print $2}'); do kill -9 $pid &> /dev/null; done
+    for pid in $(ps -ef | grep "squid" | awk '{print $2}'); do kill -9 $pid &>/dev/null; done
     sleep ${sleep_time}
     systemctl start squid.service
     echo "Squid start: $(date)" | tee -a /var/log/syslog
 fi
 # rsyslog
-if [[ `ps -A | grep rsyslogd` != "" ]];then
+if [[ $(ps -A | grep rsyslogd) != "" ]]; then
     echo -e "\nONLINE"
 else
     echo -e "\n"
-    systemctl stop syslog.socket rsyslog.service &> /dev/null
+    systemctl stop syslog.socket rsyslog.service &>/dev/null
     sleep ${sleep_time}
     systemctl start rsyslog.service
     echo "Rsyslog start: $(date)" | tee -a /var/log/syslog

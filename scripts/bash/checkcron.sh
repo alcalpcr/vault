@@ -13,13 +13,13 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # checking dependencies
@@ -31,14 +31,14 @@ else
     exit
 fi
 
-if [ ! -f /etc/crontab ]; then crontab /etc/crontab &> /dev/null && cp /etc/crontab{,.bak} &> /dev/null; fi
+if [ ! -f /etc/crontab ]; then crontab /etc/crontab &>/dev/null && cp /etc/crontab{,.bak} &>/dev/null; fi
 
 # checklines=$(colordiff /etc/crontab /etc/crontab.bak)
 checklines=$(comm -3 <((sort /etc/crontab)) <((sort /etc/crontab.bak)) | grep '.*')
 
 if ! [ "$checklines" ]; then
-   echo "No Changes"
+    echo "No Changes"
 else
-   echo "Alert. Check crontab"
-   echo "$checklines"
+    echo "Alert. Check crontab"
+    echo "$checklines"
 fi

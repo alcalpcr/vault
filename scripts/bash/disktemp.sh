@@ -14,13 +14,13 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # checking script execution
-if pidof -x $(basename $0) > /dev/null; then
-  for p in $(pidof -x $(basename $0)); do
-    if [ "$p" -ne $$ ]; then
-      echo "Script $0 is already running..."
-      exit
-    fi
-  done
+if pidof -x $(basename $0) >/dev/null; then
+    for p in $(pidof -x $(basename $0)); do
+        if [ "$p" -ne $$ ]; then
+            echo "Script $0 is already running..."
+            exit
+        fi
+    done
 fi
 
 # checking dependencies (optional)
@@ -46,7 +46,7 @@ inxi -xD | awk "/temp/ {if (\$2>$degrees) print \"ALERT: hard drive temperature 
 # checking dependencies
 the_ppa=malcscott/ppa... # e.g. the_ppa="foo/bar2"
 if ! grep -q "^deb .*$the_ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-    add-apt-repository -y ppa:malcscott/ppa > /dev/null 2>&1
+    add-apt-repository -y ppa:malcscott/ppa >/dev/null 2>&1
     apt-get install -qq hddtemp
 else
     echo OK
@@ -55,5 +55,5 @@ fi
 # for some ssd sata and hdd
 temperature=$(hddtemp /dev/sda --numeric)
 if [ $temperature -ge $degrees ]; then
-	echo "ALERT: hard drive's temperature is above: $temperature" | tee -a /var/log/syslog | xargs -0 sudo -u $local_user DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u $local_user)/bus notify-send -i checkbox
+    echo "ALERT: hard drive's temperature is above: $temperature" | tee -a /var/log/syslog | xargs -0 sudo -u $local_user DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u $local_user)/bus notify-send -i checkbox
 fi

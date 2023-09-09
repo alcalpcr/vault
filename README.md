@@ -16,21 +16,29 @@
 
 ---
 
-**To download all repositories: / Para descargar todos los repositorios:**
+### To download all repositories: / Para descargar todos los repositorios:
 
 ```bash
 git clone --depth=1 https://github.com/maravento/vault.git
 ```
 
-**To download a specific repository: / Para descargar un repositorio específico:**
+### To download a specific repository: / Para descargar un repositorio específico:
 
-- For linux (Ubuntu/Debian)(Replace "project" with the name of repository): `sudo apt install git subversion && svn export "https://github.com/maravento/vault/trunk/project"`
+- **Ubuntu/Debian:**
 
-- For Windows (10/11): with [git](https://git-scm.com/download/win) and [Apache Subversion (SVN)](https://subversion.apache.org/). You can use [with TortoiseSVN](https://tortoisesvn.net/), [smartSVN](https://www.smartsvn.com/), etc.
+  ```bash
+  sudo apt install git subversion
+  # Replace "project" with the name of repository
+  svn export "https://github.com/maravento/vault/trunk/project"`
+  ```
 
-- With [DownGit Project](https://github.com/MinhasKamal/DownGit/blob/master/README.md#how-to-use).
+- **Windows:**
 
-- Or click on the link of the project of your choice, which are described in [DATA SHEET](https://github.com/maravento/vault#data-sheet). / O clic en el enlace del proyecto de su preferencia, que se describen en [DATA SHEET](https://github.com/maravento/vault#data-sheet).
+  [TortoiseSVN](https://tortoisesvn.net/), [smartSVN](https://www.smartsvn.com/), etc.
+
+- **Web:**
+
+  [DownGit](https://github.com/MinhasKamal/DownGit/blob/master/README.md#how-to-use), [Download-directory](https://download-directory.github.io/), etc.
 
 ## DATA SHEET
 
